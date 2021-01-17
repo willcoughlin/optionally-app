@@ -1,10 +1,10 @@
-import 'react-native-gesture-handler';
-import React from 'react';
-import { registerRootComponent } from 'expo';
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './screens/HomeScreen';
+import { registerRootComponent } from 'expo';
+import React from 'react';
+import 'react-native-gesture-handler';
 import { Provider as PaperProvider } from 'react-native-paper';
+import HomeScreen from './screens/HomeScreen';
 
 const Stack = createStackNavigator();
 
