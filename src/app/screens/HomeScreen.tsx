@@ -1,22 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
-import { Button, Headline, ProgressBar, Subheading, TextInput, Title } from 'react-native-paper';
+import React from 'react';
+import { View } from 'react-native';
+import { Headline, Subheading, TextInput } from 'react-native-paper';
+import BottomStickyBar from '../components/BottomStickyBar';
 import mainStyle from '../styles/main-style';
-
-const BottomStickyView: FunctionComponent = ({ children }) => (
-  <View style={{ 
-      position: 'absolute', 
-      left: 0,
-      right: 0,
-      bottom: 0,
-      // borderColor: 'black',
-      // borderWidth: 1,
-      width: '100%',
-      margin: 20
-    }}>
-    {children}
-  </View>
-);
 
 const HomeScreen = () => {
   const [symbolInput, setSymbolInput] = React.useState('');
@@ -31,12 +17,7 @@ const HomeScreen = () => {
         value={symbolInput}
         onChangeText={text => setSymbolInput(text)} />
       
-      <BottomStickyView>
-        <ProgressBar progress={0.5} />
-        <Button>
-          Next
-        </Button>
-      </BottomStickyView>
+      <BottomStickyBar progressBarProgress={0} />
     </View>
   );
 };
