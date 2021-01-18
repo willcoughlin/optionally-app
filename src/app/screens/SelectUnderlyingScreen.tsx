@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { Button, Headline, Subheading, TextInput } from 'react-native-paper';
 import mainStyle from '../styles/main-style';
@@ -23,6 +23,7 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
         onChangeText={text => setSymbolInput(text)} />
       
       <Button 
+        disabled={!symbolInput}
         mode="contained" 
         style={{ marginTop: 50 }} 
         onPress={() => navigation.navigate('SelectStrategyScreen')}>

@@ -1,7 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { Headline, Subheading, RadioButton, Button } from 'react-native-paper';
+import { Button, Headline, RadioButton, Subheading } from 'react-native-paper';
 import { StrategyType } from '../graphql/types';
 import mainStyle from '../styles/main-style';
 import { StackParamList, STRATEGY_DISPLAY_NAMES } from '../types';
@@ -15,6 +15,7 @@ const SelectStrategyScreen = ({ navigation }: SelectStrategyScreenProps) => {
 
   const radioItemMapper = (strategy: StrategyType) => (
     <RadioButton.Item 
+      key={strategy}
       label={STRATEGY_DISPLAY_NAMES[strategy]} 
       value={strategy} />
   );
@@ -43,6 +44,7 @@ const SelectStrategyScreen = ({ navigation }: SelectStrategyScreenProps) => {
       </RadioButton.Group>
 
       <Button 
+        disabled={!selection}
         mode="contained" 
         style={{ marginTop: 50 }} 
         onPress={() => {}}>
