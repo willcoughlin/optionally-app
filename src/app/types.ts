@@ -12,6 +12,7 @@ export interface AppState {
 export type StackParamList = {
   SelectUnderlyingScreen: undefined;
   SelectStrategyScreen: undefined;
+  SelectOptionLegsScreen: undefined;
 };
 
 export const STRATEGY_DISPLAY_NAMES: { [id in StrategyType]: string } = {

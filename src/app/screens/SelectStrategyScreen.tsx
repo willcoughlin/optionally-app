@@ -47,7 +47,7 @@ const SelectStrategyScreen = ({ navigation }: SelectStrategyScreenProps) => {
         disabled={!selection}
         mode="contained" 
         style={{ marginTop: 50 }} 
-        onPress={() => {}}>
+        onPress={() => navigation.push('SelectOptionLegsScreen')}>
         Next
       </Button>
     </View>

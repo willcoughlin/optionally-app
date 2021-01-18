@@ -26,7 +26,7 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
         disabled={!symbolInput}
         mode="contained" 
         style={{ marginTop: 50 }} 
-        onPress={() => navigation.navigate('SelectStrategyScreen')}>
+        onPress={() => navigation.push('SelectStrategyScreen')}>
         Next
       </Button>
     </View>
