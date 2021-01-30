@@ -15,6 +15,7 @@ const SelectOptionLegsScreen = ({ navigation }: SelectOptionLegsScreenProps) => 
       <Headline>Finally, choose your options</Headline>
       
       <Button 
+        disabled={true}
         mode="contained" 
         style={{ marginTop: 50 }} 
         onPress={() => {}}>
