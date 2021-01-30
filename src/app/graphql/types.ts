@@ -63,6 +63,13 @@ export type ReturnsForDateByStrike = {
   returnInPercent: Scalars['Float'];
 };
 
+export type LookupResult = {
+  __typename?: 'LookupResult';
+  symbol: Scalars['String'];
+  name: Scalars['String'];
+  exchange: Scalars['String'];
+};
+
 export enum OptionType {
   Call = 'CALL',
   Put = 'PUT'
@@ -96,8 +103,14 @@ export type OptionInput = {
 
 export type Query = {
   __typename?: 'Query';
+  lookup: Array<Maybe<LookupResult>>;
   stock: Stock;
   calculateReturns: CalculatorResult;
+};
+
+
+export type QueryLookupArgs = {
+  query: Scalars['String'];
 };
 
 
