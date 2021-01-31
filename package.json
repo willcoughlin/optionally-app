@@ -9,14 +9,15 @@
     "graphql-codegen": "graphql-codegen --config graphql-codegen.yml"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.2",
+    "@apollo/client": "^3.3.7",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.9.0",
     "@react-navigation/stack": "^5.13.0",
     "expo": "~39.0.2",
     "expo-status-bar": "~1.0.2",
-    "graphql": "^15.4.0",
+    "graphql": "^15.5.0",
     "react": "16.13.1",
+    "react-apollo-hooks": "^0.5.0",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
     "react-native-gesture-handler": "~1.7.0",
