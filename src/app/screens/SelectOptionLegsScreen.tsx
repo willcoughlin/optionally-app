@@ -2,7 +2,8 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Caption, Headline, Text } from 'react-native-paper';
+import { Button, Headline, Text } from 'react-native-paper';
+import UnderlyingSelectionCard from '../components/UnderlyingSelectionCard';
 import mainStyle from '../styles/main-style';
 import { StackParamList, STRATEGY_DISPLAY_NAMES } from '../types';
 
@@ -16,10 +17,15 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
     <View style={mainStyle.container}>
       <View>
         <Headline>Finally, choose your options</Headline>
+        <UnderlyingSelectionCard 
+          name={route.params.underlying.name}
+          symbol={route.params.underlying.symbol} 
+          exchange={route.params.underlying.exchange} 
+          ask={0}
+          bid={0}
+          last={0} />
       </View>
       
-      <Text>{JSON.stringify(route.params)}</Text>
-
       <Button 
         disabled={true}
         mode="contained" 

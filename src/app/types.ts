@@ -1,16 +1,7 @@
-import { CalculatorInput, CalculatorResult, Stock, StrategyType } from "./graphql/types";
-
-// export interface AppState {
-//   error?: string,
-//   isLoading: boolean,
-//   loadingMessage?: string,
-//   selectedStock?: Stock,
-//   calculatorInput?: CalculatorInput
-//   calculatorResult?: CalculatorResult
-// };
+import { LookupResult, StrategyType } from "./graphql/types";
 
 export type SelectStrategyScreenParams = {
-  underlyingSymbol: string;
+  underlying: LookupResult
 };
 
 export type SelectOptionLegsScreenParams = SelectStrategyScreenParams & {

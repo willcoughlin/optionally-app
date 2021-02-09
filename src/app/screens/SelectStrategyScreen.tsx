@@ -2,7 +2,7 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Headline, RadioButton, Subheading, Caption } from 'react-native-paper';
+import { Button, Headline, RadioButton, Subheading } from 'react-native-paper';
 import { StrategyType } from '../graphql/types';
 import mainStyle from '../styles/main-style';
 import { StackParamList, STRATEGY_DISPLAY_NAMES } from '../types';
@@ -26,28 +26,27 @@ const SelectStrategyScreen = ({ route, navigation }: SelectStrategyScreenProps) 
     <View style={mainStyle.container}>
       <View>
         <Headline>Now, choose a strategy</Headline>
-        <Caption>Underlying: {route.params.underlyingSymbol}</Caption>
+
+        <RadioButton.Group  onValueChange={(newSelection) => setSelection(newSelection)} value={selection}>
+          <Subheading>Basic</Subheading>
+          {[
+            StrategyType.Call, 
+            StrategyType.Put, 
+            StrategyType.StraddleStrangle
+          ].map(radioItemMapper)}
+          
+          <Subheading>Vertical Spreads</Subheading>
+          {[
+            StrategyType.BullCallSpread, 
+            StrategyType.BearCallSpread, 
+            StrategyType.BearPutSpread,
+            StrategyType.BullPutSpread
+          ].map(radioItemMapper)}
+
+          <Subheading>Other</Subheading>
+          {[StrategyType.IronCondor].map(radioItemMapper)}
+        </RadioButton.Group>
       </View>
-
-      <RadioButton.Group  onValueChange={(newSelection) => setSelection(newSelection)} value={selection}>
-        <Subheading>Basic</Subheading>
-        {[
-          StrategyType.Call, 
-          StrategyType.Put, 
-          StrategyType.StraddleStrangle
-        ].map(radioItemMapper)}
-        
-        <Subheading>Vertical Spreads</Subheading>
-        {[
-          StrategyType.BullCallSpread, 
-          StrategyType.BearCallSpread, 
-          StrategyType.BearPutSpread,
-          StrategyType.BullPutSpread
-        ].map(radioItemMapper)}
-
-        <Subheading>Other</Subheading>
-        {[StrategyType.IronCondor].map(radioItemMapper)}
-      </RadioButton.Group>
 
       <Button 
         disabled={!selection}
@@ -55,7 +54,7 @@ const SelectStrategyScreen = ({ route, navigation }: SelectStrategyScreenProps) 
         style={{ marginTop: 50 }} 
         onPress={() => navigation.push(
           'SelectOptionLegsScreen', { 
-            underlyingSymbol: route.params.underlyingSymbol, 
+            underlying: route.params.underlying, 
             strategy: selection as StrategyType 
           }
         )}>

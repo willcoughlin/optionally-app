@@ -1,9 +1,9 @@
 import { gql, useLazyQuery } from '@apollo/client';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
-import { KeyboardAvoidingView, View, Keyboard, FlatList } from 'react-native';
-// import { FlatList } from 'react-native-gesture-handler';
-import { Button, Headline, Subheading, TextInput, Text, Card, Divider, List, Searchbar, ActivityIndicator } from 'react-native-paper';
+import { FlatList, Keyboard, KeyboardAvoidingView, View } from 'react-native';
+import { ActivityIndicator, Button, Card, Headline, List, Searchbar, Subheading, Text } from 'react-native-paper';
+import UnderlyingSelectionCard from '../components/UnderlyingSelectionCard';
 import { LookupResult, QueryLookupArgs } from '../graphql/types';
 import mainStyle from '../styles/main-style';
 import { StackParamList } from '../types';
@@ -76,12 +76,13 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
           </Card>
         }
         {selectionState.symbolSelection && 
-          <Card>
-            <Card.Title title={selectionState.symbolSelection.name} />
-            <Card.Content>
-              <Text>{`${selectionState.symbolSelection.exchange}: ${selectionState.symbolSelection.symbol}`}</Text>
-            </Card.Content>
-          </Card>
+          <UnderlyingSelectionCard
+            name={selectionState.symbolSelection.name}
+            symbol={selectionState.symbolSelection.symbol}
+            exchange={selectionState.symbolSelection.exchange}
+            ask={0}
+            bid={0}
+            last={0} />
         }
       </View>
       
@@ -93,7 +94,7 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
           return selectionState.symbolSelection 
             && navigation.push(
               'SelectStrategyScreen', 
-              { underlyingSymbol: selectionState.symbolSelection.symbol }
+              { underlying: selectionState.symbolSelection }
             )
         }}>
         Next
