@@ -1,18 +1,26 @@
 import { CalculatorInput, CalculatorResult, Stock, StrategyType } from "./graphql/types";
 
-export interface AppState {
-  error?: string,
-  isLoading: boolean,
-  loadingMessage?: string,
-  selectedStock?: Stock,
-  calculatorInput?: CalculatorInput
-  calculatorResult?: CalculatorResult
+// export interface AppState {
+//   error?: string,
+//   isLoading: boolean,
+//   loadingMessage?: string,
+//   selectedStock?: Stock,
+//   calculatorInput?: CalculatorInput
+//   calculatorResult?: CalculatorResult
+// };
+
+export type SelectStrategyScreenParams = {
+  underlyingSymbol: string;
+};
+
+export type SelectOptionLegsScreenParams = SelectStrategyScreenParams & {
+  strategy: StrategyType
 };
 
 export type StackParamList = {
   SelectUnderlyingScreen: undefined;
-  SelectStrategyScreen: undefined;
-  SelectOptionLegsScreen: undefined;
+  SelectStrategyScreen: SelectStrategyScreenParams;
+  SelectOptionLegsScreen: SelectOptionLegsScreenParams;
 };
 
 export const STRATEGY_DISPLAY_NAMES: { [id in StrategyType]: string } = {

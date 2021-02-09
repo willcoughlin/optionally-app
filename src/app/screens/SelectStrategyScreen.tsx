@@ -1,16 +1,18 @@
+import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Headline, RadioButton, Subheading } from 'react-native-paper';
+import { Button, Headline, RadioButton, Subheading, Caption } from 'react-native-paper';
 import { StrategyType } from '../graphql/types';
 import mainStyle from '../styles/main-style';
 import { StackParamList, STRATEGY_DISPLAY_NAMES } from '../types';
 
 type SelectStrategyScreenProps = {
+  route: RouteProp<StackParamList, 'SelectStrategyScreen'>;
   navigation: StackNavigationProp<StackParamList, 'SelectStrategyScreen'>;
 };
 
-const SelectStrategyScreen = ({ navigation }: SelectStrategyScreenProps) => {
+const SelectStrategyScreen = ({ route, navigation }: SelectStrategyScreenProps) => {
   const [selection, setSelection] = React.useState('');
 
   const radioItemMapper = (strategy: StrategyType) => (
@@ -22,7 +24,11 @@ const SelectStrategyScreen = ({ navigation }: SelectStrategyScreenProps) => {
 
   return (
     <View style={mainStyle.container}>
-      <Headline>Now, choose a strategy</Headline>
+      <View>
+        <Headline>Now, choose a strategy</Headline>
+        <Caption>Underlying: {route.params.underlyingSymbol}</Caption>
+      </View>
+
       <RadioButton.Group  onValueChange={(newSelection) => setSelection(newSelection)} value={selection}>
         <Subheading>Basic</Subheading>
         {[
@@ -47,7 +53,12 @@ const SelectStrategyScreen = ({ navigation }: SelectStrategyScreenProps) => {
         disabled={!selection}
         mode="contained" 
         style={{ marginTop: 50 }} 
-        onPress={() => navigation.push('SelectOptionLegsScreen')}>
+        onPress={() => navigation.push(
+          'SelectOptionLegsScreen', { 
+            underlyingSymbol: route.params.underlyingSymbol, 
+            strategy: selection as StrategyType 
+          }
+        )}>
         Next
       </Button>
     </View>

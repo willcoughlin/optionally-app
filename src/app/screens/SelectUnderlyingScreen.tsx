@@ -89,7 +89,13 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
       <Button
         disabled={!selectionState.symbolSelection}
         mode="contained" 
-        onPress={() => navigation.push('SelectStrategyScreen')}>
+        onPress={() => {
+          return selectionState.symbolSelection 
+            && navigation.push(
+              'SelectStrategyScreen', 
+              { underlyingSymbol: selectionState.symbolSelection.symbol }
+            )
+        }}>
         Next
       </Button>
     </KeyboardAvoidingView>
