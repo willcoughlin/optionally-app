@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { registerRootComponent } from 'expo';
 import React from 'react';
-import 'react-native-gesture-handler';
 import { ProgressBar, Provider as PaperProvider } from 'react-native-paper';
 import SelectOptionLegsScreen from './screens/SelectOptionLegsScreen';
 import SelectStrategyScreen from './screens/SelectStrategyScreen';

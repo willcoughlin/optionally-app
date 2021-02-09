@@ -1,8 +1,8 @@
 import { gql, useLazyQuery } from '@apollo/client';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
-import { KeyboardAvoidingView, View, Keyboard } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { KeyboardAvoidingView, View, Keyboard, FlatList } from 'react-native';
+// import { FlatList } from 'react-native-gesture-handler';
 import { Button, Headline, Subheading, TextInput, Text, Card, Divider, List, Searchbar, ActivityIndicator } from 'react-native-paper';
 import { LookupResult, QueryLookupArgs } from '../graphql/types';
 import mainStyle from '../styles/main-style';
