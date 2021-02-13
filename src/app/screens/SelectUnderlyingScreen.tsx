@@ -110,15 +110,24 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
         }
       </View>
       
-
       <Button
         disabled={!selectionState.symbolSelection}
         mode="contained" 
         onPress={() => {
+          if (selectionState.symbolSelection 
+            && selectionState.symbolSelection.ask 
+            && selectionState.symbolSelection.bid 
+            && selectionState.symbolSelection.last)
           return selectionState.symbolSelection 
             && navigation.push(
-              'SelectStrategyScreen', 
-              { underlying: selectionState.symbolSelection }
+              'SelectStrategyScreen', { 
+                underlying: {
+                  ...selectionState.symbolSelection,
+                  ask: selectionState.symbolSelection.ask,
+                  bid: selectionState.symbolSelection.bid,
+                  last: selectionState.symbolSelection.last
+                }
+              }
             )
         }}>
         Next

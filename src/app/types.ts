@@ -1,7 +1,7 @@
-import { LookupResult, StrategyType } from "./graphql/types";
+import { LookupResult, Stock, StrategyType } from "./graphql/types";
 
 export type SelectStrategyScreenParams = {
-  underlying: LookupResult
+  underlying: LookupResult & Pick<Stock, 'bid' | 'ask' | 'last'>
 };
 
 export type SelectOptionLegsScreenParams = SelectStrategyScreenParams & {

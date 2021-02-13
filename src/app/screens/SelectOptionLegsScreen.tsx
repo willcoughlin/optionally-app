@@ -21,9 +21,9 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
           name={route.params.underlying.name}
           symbol={route.params.underlying.symbol} 
           exchange={route.params.underlying.exchange} 
-          ask={0}
-          bid={0}
-          last={0} />
+          ask={route.params.underlying.ask}
+          bid={route.params.underlying.bid}
+          last={route.params.underlying.last} />
       </View>
       
       <Button 
