@@ -1,7 +1,7 @@
 import React from 'react';
-import { LookupResult, Stock } from '../graphql/types';
-import { Caption, Card, Text } from 'react-native-paper';
 import { View } from 'react-native';
+import { Card, Text } from 'react-native-paper';
+import { LookupResult, Stock } from '../graphql/types';
 
 export type UnderlyingSelectionCardProps = LookupResult & Pick<Stock, 'ask' | 'bid' | 'last'>;
 

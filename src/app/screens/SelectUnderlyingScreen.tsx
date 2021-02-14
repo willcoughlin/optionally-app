@@ -1,8 +1,8 @@
-import { gql, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Keyboard, KeyboardAvoidingView, View } from 'react-native';
-import { ActivityIndicator, Button, Card, Headline, List, Searchbar, Subheading, Text } from 'react-native-paper';
+import { ActivityIndicator, Button, Card, Headline, List, Searchbar, Subheading } from 'react-native-paper';
 import UnderlyingSelectionCard from '../components/UnderlyingSelectionCard';
 import { LookupQueryData, LOOKUP_QUERY, UnderlyingPriceQueryData, UNDERLYING_PRICE_QUERY } from '../graphql/queries';
 import { LookupResult, QueryLookupArgs, QueryStockArgs, Stock } from '../graphql/types';
