@@ -1,5 +1,9 @@
 import { LookupResult, Stock, StrategyType } from "./graphql/types";
 
+export type DeepPartial<T> = {
+  [P in keyof T]?: DeepPartial<T[P]>;
+};
+
 export type SelectStrategyScreenParams = {
   underlying: LookupResult & Pick<Stock, 'bid' | 'ask' | 'last'>
 };

@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
-import { LookupResult, Stock } from "./types";
+import { DeepPartial } from "../types";
+import { LookupResult, MakeOptional, Option, OptionsForExpiry, Stock } from "./types";
 
 export const LOOKUP_QUERY = gql`
   query LookupQuery($query: String!) {
@@ -28,3 +29,35 @@ export const UNDERLYING_PRICE_QUERY = gql`
 export type UnderlyingPriceQueryData = {
   stock: Pick<Stock, 'bid' | 'ask' | 'last'>;
 }
+
+export const OPTIONS_CHAIN_QUERY = gql`
+  query OptionsChainQuery($symbol: String!) {
+    stock(symbol: $symbol) {
+      optionsChain {
+        expiry
+        calls {
+          strike
+          last
+          bid
+          ask
+          impliedVolatility
+        }
+        puts {
+          strike
+          last
+          bid
+          ask
+          impliedVolatility
+        }
+      }
+    }
+  }
+`;
+
+export type PartialOptionsForExpiry = DeepPartial<OptionsForExpiry> & Pick<OptionsForExpiry, 'expiry'>;
+
+export type OptionsChainQueryData = {
+  stock: {
+    optionsChain: PartialOptionsForExpiry[];
+  }
+};
