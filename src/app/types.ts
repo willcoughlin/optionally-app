@@ -28,3 +28,8 @@ export const STRATEGY_DISPLAY_NAMES: { [id in StrategyType]: string } = {
   BULL_PUT_SPREAD: 'Bull Put Spread',
   IRON_CONDOR: 'Iron Condor'
 };
+
+export enum PositionType {
+  Short = 'short',
+  Long = 'long'
+}

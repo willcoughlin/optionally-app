@@ -3,27 +3,31 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import { ActivityIndicator, Button, Headline } from 'react-native-paper';
-import OptionSelectModal from '../components/OptionSelectModal';
+import { ActivityIndicator, Button, Headline, Subheading, Title, RadioButton } from 'react-native-paper';
 import UnderlyingSelectionCard from '../components/UnderlyingSelectionCard';
 import { OptionsChainQueryData, OPTIONS_CHAIN_QUERY, PartialOptionsForExpiry } from '../graphql/queries';
-import { OptionType, QueryStockArgs } from '../graphql/types';
+import { CalculatorInput, OptionType, QueryStockArgs, StrategyType } from '../graphql/types';
 import mainStyle from '../styles/main-style';
-import { StackParamList } from '../types';
+import { PositionType, StackParamList, STRATEGY_DISPLAY_NAMES } from '../types';
 
 type SelectOptionLegsScreenProps = {
   route: RouteProp<StackParamList, 'SelectOptionLegsScreen'>;
   navigation: StackNavigationProp<StackParamList, 'SelectOptionLegsScreen'>;
 };
 
-// type SelectOptionLegsScreenState = {
-//   options?: PartialOptionsForExpiry[];
-// };
+type SelectOptionLegsScreenState = {
+  options?: PartialOptionsForExpiry[];
+  calculatorInput: CalculatorInput;
+  showShortRadio: boolean;
+  isShortStrategy: boolean;
+};
 
 const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenProps) => {
-  const strategy = route.params.strategy;
-
-  const [optionSelectVisible, setOptionSelectVisible] = useState<boolean>(true);
+  const [screenState, setScreenState] = useState<SelectOptionLegsScreenState>({ 
+    calculatorInput: { strategy: route.params.strategy },
+    showShortRadio: [StrategyType.Call, StrategyType.Put, StrategyType.StraddleStrangle].includes(route.params.strategy),
+    isShortStrategy: false
+  });
 
   const {loading: optionsChainLoading, error: optionsChainError, data: optionsChainData} = useQuery<OptionsChainQueryData, QueryStockArgs>(
     OPTIONS_CHAIN_QUERY, { 
@@ -41,16 +45,43 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
           ask={route.params.underlying.ask}
           bid={route.params.underlying.bid}
           last={route.params.underlying.last} />
-      </View>
 
-      {optionsChainLoading && <ActivityIndicator animating={true} />}
-      {optionsChainData && 
-        <OptionSelectModal 
-          visible={optionSelectVisible} 
-          dismissAction={() => setOptionSelectVisible(false)}
-          optionType={OptionType.Call}
-          optionsChain={optionsChainData.stock.optionsChain} />
-      }
+        {optionsChainLoading && <ActivityIndicator animating={true} />}
+        {optionsChainData && 
+          <View>
+            <Title>Strategy: {STRATEGY_DISPLAY_NAMES[route.params.strategy]}</Title>
+            {screenState.showShortRadio && 
+              <RadioButton.Group 
+                onValueChange={(newSelection) => setScreenState({ ...screenState, isShortStrategy: newSelection == PositionType.Short })}
+                value={screenState.isShortStrategy ? PositionType.Short : PositionType.Long}
+              >
+                <RadioButton.Item label="Long" value={PositionType.Long} />
+                <RadioButton.Item label="Short" value={PositionType.Short} />
+              </RadioButton.Group>
+            }
+            <Subheading>Long Call</Subheading>
+            <Button 
+              mode="outlined">
+                Select Option
+            </Button>
+            <Subheading>Short Call</Subheading>
+            <Button 
+              mode="outlined">
+                Select Option
+            </Button>
+            <Subheading>Long Put</Subheading>
+            <Button 
+              mode="outlined">
+                Select Option
+            </Button>
+            <Subheading>Short Put</Subheading>
+            <Button 
+              mode="outlined">
+                Select Option
+            </Button>
+          </View>
+        }
+      </View>
 
       {/* {strategy === StrategyType.Call && <Text>{STRATEGY_DISPLAY_NAMES[StrategyType.Call]}</Text>}
       {strategy === StrategyType.Put && <Text>{STRATEGY_DISPLAY_NAMES[StrategyType.Put]}</Text>}
