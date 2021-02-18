@@ -40,14 +40,12 @@ export const OPTIONS_CHAIN_QUERY = gql`
           last
           bid
           ask
-          impliedVolatility
         }
         puts {
           strike
           last
           bid
           ask
-          impliedVolatility
         }
       }
     }

@@ -35,7 +35,7 @@ const SelectStrategyScreen = ({ route, navigation }: SelectStrategyScreenProps) 
             StrategyType.StraddleStrangle
           ].map(radioItemMapper)}
           
-          <Subheading>Vertical Spreads</Subheading>
+          {/* <Subheading>Vertical Spreads</Subheading>
           {[
             StrategyType.BullCallSpread, 
             StrategyType.BearCallSpread, 
@@ -44,7 +44,7 @@ const SelectStrategyScreen = ({ route, navigation }: SelectStrategyScreenProps) 
           ].map(radioItemMapper)}
 
           <Subheading>Other</Subheading>
-          {[StrategyType.IronCondor].map(radioItemMapper)}
+          {[StrategyType.IronCondor].map(radioItemMapper)} */}
         </RadioButton.Group>
       </View>
 
