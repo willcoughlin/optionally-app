@@ -2,7 +2,8 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Headline, RadioButton, Subheading } from 'react-native-paper';
+import { Button, Card, Headline, RadioButton, Subheading, Title } from 'react-native-paper';
+import UnderlyingSelectionCard from '../components/UnderlyingSelectionCard';
 import { StrategyType } from '../graphql/types';
 import mainStyle from '../styles/main-style';
 import { StackParamList, STRATEGY_DISPLAY_NAMES } from '../types';
@@ -26,7 +27,6 @@ const SelectStrategyScreen = ({ route, navigation }: SelectStrategyScreenProps) 
     <View style={mainStyle.container}>
       <View>
         <Headline>Now, choose a strategy</Headline>
-
         <RadioButton.Group  onValueChange={(newSelection) => setSelection(newSelection)} value={selection}>
           <Subheading>Basic</Subheading>
           {[
