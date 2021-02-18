@@ -77,7 +77,7 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
                 <FlatList 
                   data={lookupData.lookup}
                   keyboardShouldPersistTaps="always"
-                  keyExtractor={(item) => item.exchange + item.symbol}
+                  keyExtractor={item => item.exchange + item.symbol}
                   renderItem={({ item }) => (
                     <List.Item
                       style={{ padding: 0 }}

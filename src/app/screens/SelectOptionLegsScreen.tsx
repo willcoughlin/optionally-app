@@ -2,12 +2,12 @@ import { useQuery } from '@apollo/client';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import { ActivityIndicator, Button, Headline, Subheading, Title, RadioButton } from 'react-native-paper';
+import { View } from 'react-native';
+import { ActivityIndicator, Button, Headline, RadioButton, Title } from 'react-native-paper';
 import OptionSelector from '../components/OptionSelector';
 import UnderlyingSelectionCard from '../components/UnderlyingSelectionCard';
 import { OptionsChainQueryData, OPTIONS_CHAIN_QUERY, PartialOptionsForExpiry } from '../graphql/queries';
-import { CalculatorInput, OptionInput, OptionType, QueryStockArgs, StrategyType } from '../graphql/types';
+import { CalculatorInput, OptionType, QueryStockArgs, StrategyType } from '../graphql/types';
 import mainStyle from '../styles/main-style';
 import { PositionType, StackParamList, STRATEGY_DISPLAY_NAMES } from '../types';
 
