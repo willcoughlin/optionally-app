@@ -15,7 +15,12 @@ const Stack = createStackNavigator<StackParamList>();
 // Initialize Apollo Client
 const client = new ApolloClient({
   uri: 'http://192.168.1.106:3000/graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    typePolicies: {
+      LookupResult: { keyFields: ['symbol', 'exchange'] },
+      Stock: { keyFields: false }  // do not normalize Stock quotes, as they are time dependent
+    }
+  })
 });
 
 const App = () => (
