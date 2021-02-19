@@ -9,9 +9,10 @@ import OptionSelector from '../components/OptionSelector';
 import UnderlyingSelectionCard from '../components/UnderlyingSelectionCard';
 import { OptionsChainQueryData, OPTIONS_CHAIN_QUERY, PartialOptionsForExpiry } from '../graphql/queries';
 import { CalculatorInput, OptionType, QueryStockArgs, StrategyType } from '../graphql/types';
-import mainStyle from '../styles/main-style';
+import Style from '../style';
 import { PositionType, StackParamList, STRATEGY_DISPLAY_NAMES } from '../types';
 
+/* Related types */
 type SelectOptionLegsScreenProps = {
   route: RouteProp<StackParamList, 'SelectOptionLegsScreen'>;
   navigation: StackNavigationProp<StackParamList, 'SelectOptionLegsScreen'>;
@@ -24,22 +25,27 @@ type SelectOptionLegsScreenState = {
   isShortStrategy: boolean;
 };
 
+/* Screen definition */
 const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenProps) => {
+  // Set up state
   const [screenState, setScreenState] = useState<SelectOptionLegsScreenState>({ 
     calculatorInput: { strategy: route.params.strategy },
     showShortRadio: [StrategyType.Call, StrategyType.Put, StrategyType.StraddleStrangle].includes(route.params.strategy),
     isShortStrategy: false
   });
 
+  // Load options for selection
   const {loading: optionsChainLoading, error: optionsChainError, data: optionsChainData} = useQuery<OptionsChainQueryData, QueryStockArgs>(
     OPTIONS_CHAIN_QUERY, { 
       variables: { symbol: route.params.underlying.symbol }
     });
 
   return (
-    <View style={mainStyle.container}>
+    <View style={Style.container}>
       <View>
         <Headline>Finally, choose your options</Headline>
+
+        {/* Underlying card */}
         <UnderlyingSelectionCard 
           style={{ marginTop: 0 }}
           name={route.params.underlying.name}
@@ -49,10 +55,14 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
           bid={route.params.underlying.bid}
           last={route.params.underlying.last} />
 
-        {optionsChainLoading && <ActivityIndicator style={{ marginTop: 10 }} animating={true} />}
+        {/* Indicate loading */}
+        {optionsChainLoading && <ActivityIndicator style={Style.standardTopMargin} animating={true} />}
+        
+        {/* Done loading */}
         {optionsChainData && 
           <>  
-            <Card style={{ marginTop: 10 }}>
+            {/* Strategy display card */}
+            <Card style={Style.standardTopMargin}>
               <Card.Title title="Strategy" />
               <Card.Content>
                 <View style={{ 
@@ -61,6 +71,8 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
                   alignItems: 'center'
                 }}>
                   <Subheading>{STRATEGY_DISPLAY_NAMES[route.params.strategy]}</Subheading>
+                  
+                  {/* Show a picker if we need to choose long/short for strategy */}
                   {screenState.showShortRadio && 
                     <Picker
                       style={{ padding: 0, width: '40%' }}
@@ -74,7 +86,9 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
                 </View>
               </Card.Content>
             </Card>
-            <View style={{ marginTop: 10 }}>
+
+            {/* Configure option legs below info cards */}
+            <View style={Style.standardTopMargin}>
 
               {/* Show single option selector for Call or Put strategy */}
               {[StrategyType.Call, StrategyType.Put].includes(route.params.strategy) && 
@@ -94,6 +108,7 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
                   })} />
               }
 
+              {/* Show Call and Put selectors for Straddle/Strangle */}
               {route.params.strategy == StrategyType.StraddleStrangle &&
                 <>
                   <OptionSelector
@@ -123,6 +138,7 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
                   </>
               }
 
+              {/* For all below spread types, show long and short call selectors */}
               {[StrategyType.BullCallSpread, StrategyType.BearCallSpread, StrategyType.IronCondor].includes(route.params.strategy) &&
                 <>
                   <OptionSelector
@@ -150,6 +166,7 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
                 </>
               }
 
+              {/* For all below spread types, show long and short put selectors */}
               {[StrategyType.BearPutSpread, StrategyType.BullPutSpread, StrategyType.IronCondor].includes(route.params.strategy) &&
                 <>
                   <OptionSelector
@@ -184,8 +201,9 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
       <Button 
         disabled={true}
         mode="contained" 
-        style={{ marginTop: 50 }} 
-        onPress={() => {}}>
+        style={Style.nextScreenButton} 
+        onPress={() => {}}
+      >
         Next
       </Button>
     </View>

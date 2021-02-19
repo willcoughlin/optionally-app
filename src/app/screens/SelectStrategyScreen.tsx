@@ -2,10 +2,9 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { View } from 'react-native';
-import { Button, Card, Headline, RadioButton, Subheading, Title } from 'react-native-paper';
-import UnderlyingSelectionCard from '../components/UnderlyingSelectionCard';
+import { Button, Headline, RadioButton, Subheading } from 'react-native-paper';
 import { StrategyType } from '../graphql/types';
-import mainStyle from '../styles/main-style';
+import Style from '../style';
 import { StackParamList, STRATEGY_DISPLAY_NAMES } from '../types';
 
 type SelectStrategyScreenProps = {
@@ -24,7 +23,7 @@ const SelectStrategyScreen = ({ route, navigation }: SelectStrategyScreenProps) 
   );
 
   return (
-    <View style={mainStyle.container}>
+    <View style={Style.container}>
       <View>
         <Headline>Now, choose a strategy</Headline>
         <RadioButton.Group  onValueChange={(newSelection) => setSelection(newSelection)} value={selection}>
@@ -51,7 +50,7 @@ const SelectStrategyScreen = ({ route, navigation }: SelectStrategyScreenProps) 
       <Button 
         disabled={!selection}
         mode="contained" 
-        style={{ marginTop: 50 }} 
+        style={Style.nextScreenButton} 
         onPress={() => navigation.push(
           'SelectOptionLegsScreen', { 
             underlying: route.params.underlying, 

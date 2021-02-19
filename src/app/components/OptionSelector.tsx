@@ -5,8 +5,10 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import { Button, Caption, List, Modal, Portal, Subheading, Title } from 'react-native-paper';
 import { PartialOptionsForExpiry } from '../graphql/queries';
 import { Option, OptionInput, OptionType } from '../graphql/types';
+import Style from '../style';
 import { DeepPartial } from '../types';
 
+/* Related types */
 type OptionSelectorProps = {
   onChangeSelection: (selection: OptionInput) => void;
   optionType: OptionType;
@@ -22,6 +24,7 @@ type OptionSelectorState = {
   selection?: OptionInput;
 };
 
+/* Style */
 const style = StyleSheet.create({
   modal: {
     justifyContent: 'flex-start',
@@ -44,11 +47,8 @@ const OptionSelector = (props: OptionSelectorProps) => {
   const flatlistRef = createRef() as RefObject<FlatList<DeepPartial<Option> | undefined>>;
 
   return (
-    <View style={{ marginTop: 10 }}>
-      <Title>
-        {props.title}
-        
-      </Title>
+    <View style={Style.standardTopMargin}>
+      <Title>{props.title}</Title>
       <Subheading>
         {selectorState.selection
             ? `${moment(selectorState.selection.expiry).format('MMM DD, YYYY')} $${selectorState.selection.strike.toFixed(2)} ${props.optionType}`
@@ -105,7 +105,7 @@ const OptionSelector = (props: OptionSelectorProps) => {
                   style={{ padding: 0 }}
                   title={`$${item?.strike?.toFixed(2)} Strike`} 
                   description={() => (
-                    <View style={{ paddingRight: 16, flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View style={[Style.flexRowSpaceBetween, { paddingRight: 16 }]}>
                       <Caption>Last: {item?.last?.toFixed(2)}</Caption>
                       <Caption>Bid: {item?.bid?.toFixed(2)}</Caption>
                       <Caption>Ask: {item?.ask?.toFixed(2)}</Caption>

@@ -7,6 +7,7 @@ import { ProgressBar, Provider as PaperProvider } from 'react-native-paper';
 import SelectOptionLegsScreen from './screens/SelectOptionLegsScreen';
 import SelectStrategyScreen from './screens/SelectStrategyScreen';
 import SelectUnderlyingScreen from './screens/SelectUnderlyingScreen';
+import Style from './style';
 import { StackParamList } from './types';
 
 const Stack = createStackNavigator<StackParamList>();
@@ -24,36 +25,32 @@ const App = () => (
         <Stack.Navigator 
           headerMode="float" 
           screenOptions={{ 
-            headerStyle: {
-              elevation: 0,
-              shadowOpacity: 0,
-              borderBottomWidth: 0
-            },
+            headerStyle: Style.navigationHeader,
             ...TransitionPresets.SlideFromRightIOS, 
             }}>
           
           <Stack.Screen 
             name="SelectUnderlyingScreen" 
             component={SelectUnderlyingScreen} 
-            options={{ headerTitle: () => <ProgressBar style={{marginHorizontal: 56}} progress={0} /> }} 
+            options={{ headerTitle: () => <ProgressBar style={[Style.navigationProgressBar, { marginLeft: 56 }]} progress={0} /> }} 
             />
 
           <Stack.Screen 
             name="SelectStrategyScreen" 
             component={SelectStrategyScreen} 
-            options={{ headerTitle: () => <ProgressBar style={{ marginRight: 56 }} progress={0.25} /> }} 
+            options={{ headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={0.25} /> }} 
             />
 
           <Stack.Screen 
             name="SelectOptionLegsScreen" 
             component={SelectOptionLegsScreen} 
-            options={{ headerTitle: () => <ProgressBar style={{ marginRight: 56 }} progress={0.51} /> }} 
+            options={{ headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={0.51} /> }} 
             />
 
           {/* <Stack.Screen 
             name="ResultsScreen" 
             component={ResultsScreen} 
-            options={{ headerTitle: () => <ProgressBar style={{ marginRight: 56 }} progress={1} /> }} 
+            options={{ headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={1} /> }} 
           /> */}
         </Stack.Navigator>
       </NavigationContainer>

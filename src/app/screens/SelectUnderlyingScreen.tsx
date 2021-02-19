@@ -6,7 +6,7 @@ import { ActivityIndicator, Button, Card, Headline, List, Searchbar, Subheading 
 import UnderlyingSelectionCard from '../components/UnderlyingSelectionCard';
 import { LookupQueryData, LOOKUP_QUERY, UnderlyingPriceQueryData, UNDERLYING_PRICE_QUERY } from '../graphql/queries';
 import { LookupResult, QueryLookupArgs, QueryStockArgs, Stock } from '../graphql/types';
-import mainStyle from '../styles/main-style';
+import Style from '../style';
 import { StackParamList } from '../types';
 
 type SelectUnderlyingScreenProps = {
@@ -54,7 +54,7 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
   }, [priceData])
 
   return ( 
-    <KeyboardAvoidingView style={mainStyle.container}>
+    <KeyboardAvoidingView style={Style.container}>
       <View>
         <Headline>First things first</Headline>
         <Subheading>Choose an underlying stock/ETF</Subheading>
