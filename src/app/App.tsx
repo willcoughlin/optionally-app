@@ -9,12 +9,13 @@ import SelectStrategyScreen from './screens/SelectStrategyScreen';
 import SelectUnderlyingScreen from './screens/SelectUnderlyingScreen';
 import Style from './style';
 import { StackParamList } from './types';
+import Variables from './variables';
 
 const Stack = createStackNavigator<StackParamList>();
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: 'http://192.168.1.106:3000/graphql',
+  uri: Variables.serverUrl,
   cache: new InMemoryCache({
     typePolicies: {
       LookupResult: { keyFields: ['symbol', 'exchange'] },
