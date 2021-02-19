@@ -9,13 +9,13 @@
     "graphql-codegen": "graphql-codegen --config graphql-codegen.yml"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.7",
+    "@apollo/client": "^3.3.11",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-picker/picker": "^1.9.11",
-    "@react-navigation/native": "^5.9.0",
-    "@react-navigation/stack": "^5.13.0",
-    "expo": "~39.0.2",
-    "expo-status-bar": "~1.0.2",
+    "@react-navigation/native": "^5.9.2",
+    "@react-navigation/stack": "^5.14.2",
+    "expo": "^39.0.5",
+    "expo-status-bar": "^1.0.3",
     "graphql": "^15.5.0",
     "moment": "^2.29.1",
     "react": "16.13.1",
@@ -23,7 +23,7 @@
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.4.tar.gz",
     "react-native-gesture-handler": "~1.7.0",
-    "react-native-paper": "^4.7.0",
+    "react-native-paper": "^4.7.1",
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.4",
     "react-native-screens": "~2.10.1",
@@ -32,14 +32,14 @@
   "devDependencies": {
     "@babel/core": "~7.9.0",
     "@graphql-codegen/cli": "1.19.4",
-    "@types/react": "~16.9.35",
-    "@types/react-dom": "~16.9.8",
-    "@types/react-native": "~0.63.2",
-    "babel-preset-expo": "^8.3.0",
-    "typescript": "~3.9.5",
+    "@graphql-codegen/typescript": "1.19.0",
     "@graphql-codegen/typescript-operations": "1.17.12",
     "@graphql-codegen/typescript-react-apollo": "2.2.1",
-    "@graphql-codegen/typescript": "1.19.0"
+    "@types/react": "~16.9.35",
+    "@types/react-dom": "^16.9.11",
+    "@types/react-native": "^0.63.50",
+    "babel-preset-expo": "^8.3.0",
+    "typescript": "^3.9.9"
   },
   "private": true
 }
