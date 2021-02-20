@@ -1,5 +1,4 @@
 import { Picker } from '@react-native-picker/picker';
-import moment from 'moment';
 import React, { createRef, RefObject, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Button, Caption, List, Modal, Portal, Subheading, Title } from 'react-native-paper';
@@ -7,6 +6,7 @@ import { PartialOptionsForExpiry } from '../graphql/queries';
 import { Option, OptionInput, OptionType } from '../graphql/types';
 import Style from '../style';
 import { DeepPartial } from '../types';
+import { formatDollarAmount, isoToDisplay } from '../util';
 
 /* Related types */
 type OptionSelectorProps = {
@@ -51,7 +51,7 @@ const OptionSelector = (props: OptionSelectorProps) => {
       <Title>{props.title}</Title>
       <Subheading>
         {selectorState.selection
-            ? `${moment(selectorState.selection.expiry).format('MMM DD, YYYY')} $${selectorState.selection.strike.toFixed(2)} ${props.optionType}`
+            ? `${isoToDisplay(selectorState.selection.expiry)} ${formatDollarAmount(selectorState.selection.strike)} ${props.optionType}`
             : 'None' 
         }
       </Subheading>
@@ -82,7 +82,7 @@ const OptionSelector = (props: OptionSelectorProps) => {
               flatlistRef.current?.scrollToOffset({ offset: 0 });
               setSelectorState({ 
                 ...selectorState, 
-                selectedDate: dateSelection,
+                selectedDate: dateSelection as string,
                 optionsForExpiry: props.options.find(it => it.expiry == dateSelection)
               });
             }}
@@ -91,7 +91,7 @@ const OptionSelector = (props: OptionSelectorProps) => {
               <Picker.Item 
                 key={optionsForExpiry.expiry} 
                 value={optionsForExpiry.expiry} 
-                label={moment(optionsForExpiry.expiry).format('MMM DD, YYYY')} />
+                label={isoToDisplay(optionsForExpiry.expiry)} />
             ))}
           </Picker>
 
@@ -103,12 +103,12 @@ const OptionSelector = (props: OptionSelectorProps) => {
               renderItem={({ item }) => (
                 <List.Item 
                   style={{ padding: 0 }}
-                  title={`$${item?.strike?.toFixed(2)} Strike`} 
+                  title={`${formatDollarAmount(item?.strike ?? 0)} Strike`} 
                   description={() => (
                     <View style={[Style.flexRowSpaceBetween, { paddingRight: 16 }]}>
-                      <Caption>Last: {item?.last?.toFixed(2)}</Caption>
-                      <Caption>Bid: {item?.bid?.toFixed(2)}</Caption>
-                      <Caption>Ask: {item?.ask?.toFixed(2)}</Caption>
+                      <Caption>Last: {(item?.last ?? 0).toFixed(2)}</Caption>
+                      <Caption>Bid: {(item?.bid ?? 0).toFixed(2)}</Caption>
+                      <Caption>Ask: {(item?.ask ?? 0).toFixed(2)}</Caption>
                     </View>
                   )} 
                   onPress={() => setSelectorState({

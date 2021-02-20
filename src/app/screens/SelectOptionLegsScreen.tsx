@@ -75,7 +75,7 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
                   {/* Show a picker if we need to choose long/short for strategy */}
                   {screenState.showShortRadio && 
                     <Picker
-                      style={{ padding: 0, width: '40%' }}
+                      style={{ padding: 0, width: '50%' }}
                       selectedValue={screenState.isShortStrategy ? PositionType.Short : PositionType.Long}
                       onValueChange={newSelection => setScreenState({ ...screenState, isShortStrategy: newSelection == PositionType.Short })}
                     >

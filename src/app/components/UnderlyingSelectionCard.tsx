@@ -18,9 +18,9 @@ const UnderlyingSelectionCard = (props: UnderlyingSelectionCardProps) => (
       />
     <Card.Content>
       <View style={Style.flexRowSpaceBetween}>
-        <Text>Last: {props.last?.toFixed(2)}</Text>
-        <Text>Bid: {props.bid?.toFixed(2)}</Text>
-        <Text>Ask: {props.ask?.toFixed(2)}</Text>
+        <Text>Last: {(props.last ?? 0).toFixed(2)}</Text>
+        <Text>Bid: {(props.bid ?? 0).toFixed(2)}</Text>
+        <Text>Ask: {(props.ask ?? 0).toFixed(2)}</Text>
       </View>
     </Card.Content>
   </Card>
