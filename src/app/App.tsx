@@ -7,6 +7,7 @@ import { ProgressBar, Provider as PaperProvider } from 'react-native-paper';
 import SelectOptionLegsScreen from './screens/SelectOptionLegsScreen';
 import SelectStrategyScreen from './screens/SelectStrategyScreen';
 import SelectUnderlyingScreen from './screens/SelectUnderlyingScreen';
+import ViewResultsScreen from './screens/ViewResultsScreen';
 import Style from './style';
 import { StackParamList } from './types';
 import Variables from './variables';
@@ -52,11 +53,11 @@ const App = () => (
             options={{ headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={0.51} /> }} 
             />
 
-          {/* <Stack.Screen 
-            name="ResultsScreen" 
-            component={ResultsScreen} 
+          <Stack.Screen 
+            name="ViewResultsScreen" 
+            component={ViewResultsScreen} 
             options={{ headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={1} /> }} 
-          /> */}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>  

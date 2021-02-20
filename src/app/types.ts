@@ -1,4 +1,4 @@
-import { LookupResult, Stock, StrategyType } from "./graphql/types";
+import { CalculatorInput, LookupResult, Stock, StrategyType } from "./graphql/types";
 
 export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;
@@ -12,10 +12,15 @@ export type SelectOptionLegsScreenParams = SelectStrategyScreenParams & {
   strategy: StrategyType
 };
 
+export type ViewResultsScreenParams = {
+  calculatorInput: CalculatorInput
+};
+
 export type StackParamList = {
   SelectUnderlyingScreen: undefined;
   SelectStrategyScreen: SelectStrategyScreenParams;
   SelectOptionLegsScreen: SelectOptionLegsScreenParams;
+  ViewResultsScreen: ViewResultsScreenParams;
 };
 
 export const STRATEGY_DISPLAY_NAMES: { [id in StrategyType]: string } = {

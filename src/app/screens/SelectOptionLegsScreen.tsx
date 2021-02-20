@@ -265,8 +265,11 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
           disabled={inputHasError}
           mode="contained" 
           style={Style.nextScreenButton} 
-          onPress={() => {}}
-        >
+          onPress={() => navigation.push(
+            'ViewResultsScreen', {
+              calculatorInput: screenState.calculatorInput
+            }
+          )}>
           Next
         </Button>
       </View>
