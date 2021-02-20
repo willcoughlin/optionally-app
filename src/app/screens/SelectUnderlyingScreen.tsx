@@ -96,17 +96,14 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
         {priceLoading && <ActivityIndicator style={{ marginTop: 10 }} animating={true} />}
 
         {/* If price done loading, show card */}
-        {selectionState.symbolSelection 
-          && selectionState.symbolSelection.ask 
-          && selectionState.symbolSelection.bid 
-          && selectionState.symbolSelection.last && 
+        {selectionState.symbolSelection &&
           <UnderlyingSelectionCard
             name={selectionState.symbolSelection.name}
             symbol={selectionState.symbolSelection.symbol}
             exchange={selectionState.symbolSelection.exchange}
-            ask={selectionState.symbolSelection.ask}
-            bid={selectionState.symbolSelection.bid }
-            last={selectionState.symbolSelection.last} />
+            ask={selectionState.symbolSelection.ask ?? 0}
+            bid={selectionState.symbolSelection.bid ?? 0 }
+            last={selectionState.symbolSelection.last ?? 0} />
         }
       </View>
       

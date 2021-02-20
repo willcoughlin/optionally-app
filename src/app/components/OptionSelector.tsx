@@ -1,5 +1,5 @@
-import { Picker } from '@react-native-picker/picker';
-import React, { createRef, RefObject, useState } from 'react';
+import { Picker as SelectPicker } from '@react-native-picker/picker';
+import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Button, Caption, List, Modal, Portal, Subheading, Title } from 'react-native-paper';
 import { PartialOptionsForExpiry } from '../graphql/queries';
@@ -43,6 +43,9 @@ const OptionSelector = (props: OptionSelectorProps) => {
     optionsForExpiry: props.options[0]
   });
 
+  // Set up change selection callback
+  useEffect(() => selectorState.selection && props.onChangeSelection(selectorState.selection), [selectorState.selection]);
+
   // Create ref to list of strikes so we can scroll it programmatically
   const flatlistRef = createRef() as RefObject<FlatList<DeepPartial<Option> | undefined>>;
 
@@ -75,7 +78,7 @@ const OptionSelector = (props: OptionSelectorProps) => {
           contentContainerStyle={style.modal}
         >
           <Title>{props.title ?? 'Select Option'}</Title>
-          <Picker
+          <SelectPicker
             prompt="Select Expiration Date"
             selectedValue={selectorState.selectedDate}
             onValueChange={dateSelection => {
@@ -88,12 +91,12 @@ const OptionSelector = (props: OptionSelectorProps) => {
             }}
           >
             {props.options.map(optionsForExpiry => (
-              <Picker.Item 
+              <SelectPicker.Item 
                 key={optionsForExpiry.expiry} 
                 value={optionsForExpiry.expiry} 
                 label={isoToDisplay(optionsForExpiry.expiry)} />
             ))}
-          </Picker>
+          </SelectPicker>
 
           {selectorState.optionsForExpiry && 
             <FlatList

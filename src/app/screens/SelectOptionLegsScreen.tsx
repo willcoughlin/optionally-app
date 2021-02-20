@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client';
-import { Picker } from '@react-native-picker/picker';
+import { Picker as SelectPicker } from '@react-native-picker/picker';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { ActivityIndicator, Button, Card, Headline, Subheading } from 'react-native-paper';
 import OptionSelector from '../components/OptionSelector';
@@ -25,6 +25,43 @@ type SelectOptionLegsScreenState = {
   isShortStrategy: boolean;
 };
 
+/* Helpers */
+const validateCalculatorInput = (calculatorInput: CalculatorInput): boolean => {
+  switch (calculatorInput.strategy) {
+    // Call needs long call or short call
+    case StrategyType.Call:
+      return !!calculatorInput.longCall || !!calculatorInput.shortCall;
+    // Put needs long put or short put
+    case StrategyType.Put:
+      return !!calculatorInput.longPut || !!calculatorInput.longPut;
+    // Straddle/Strangle needs long call and long put, or short call and short put, with call strike >= put strike
+    case StrategyType.StraddleStrangle:
+      if (calculatorInput.longCall && calculatorInput.longPut)
+        return calculatorInput.longCall.strike >= calculatorInput.longPut.strike;
+      if (calculatorInput.shortCall && calculatorInput.shortPut)
+        return calculatorInput.shortCall.strike >= calculatorInput.shortPut.strike;
+      return false;
+    // Bull call spread needs long call and short call, with long strike <= short strike
+    case StrategyType.BullCallSpread:
+      return !!calculatorInput.longCall && !!calculatorInput.shortCall && (calculatorInput.longCall.strike <= calculatorInput.shortCall.strike);
+    // Bear call spread needs long call and short call, with long strike >= short strike
+    case StrategyType.BearCallSpread:
+      return !!calculatorInput.longCall && !!calculatorInput.shortCall && (calculatorInput.longCall.strike >= calculatorInput.shortCall.strike);
+    // Bear put spread needs long put and short put, with long strike >= short strike
+    case StrategyType.BearPutSpread:
+      return !!calculatorInput.longPut && !!calculatorInput.shortPut && (calculatorInput.longPut.strike >= calculatorInput.shortPut.strike);
+    // Bull put spread needs long put and short put, with long strike <= short strike
+    case StrategyType.BullPutSpread:
+      return !!calculatorInput.longPut && !!calculatorInput.shortPut && (calculatorInput.longPut.strike <= calculatorInput.shortPut.strike);
+    // Iron condor needs all components with long call strike >= short call strike and long put strike <= short put strike
+    case StrategyType.IronCondor:
+      return !!calculatorInput.longCall && !!calculatorInput.shortCall && !!calculatorInput.longPut && !!calculatorInput.shortPut
+        && (calculatorInput.longCall.strike >= calculatorInput.shortCall.strike) && (calculatorInput.longPut.strike <= calculatorInput.shortPut.strike);
+    default:
+      return false;
+  }
+}
+
 /* Screen definition */
 const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenProps) => {
   // Set up state
@@ -37,6 +74,7 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
   // Load options for selection
   const {loading: optionsChainLoading, error: optionsChainError, data: optionsChainData} = useQuery<OptionsChainQueryData, QueryStockArgs>(
     OPTIONS_CHAIN_QUERY, { 
+      fetchPolicy: 'no-cache',
       variables: { symbol: route.params.underlying.symbol }
     });
 
@@ -74,14 +112,14 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
                   
                   {/* Show a picker if we need to choose long/short for strategy */}
                   {screenState.showShortRadio && 
-                    <Picker
+                    <SelectPicker
                       style={{ padding: 0, width: '50%' }}
                       selectedValue={screenState.isShortStrategy ? PositionType.Short : PositionType.Long}
                       onValueChange={newSelection => setScreenState({ ...screenState, isShortStrategy: newSelection == PositionType.Short })}
                     >
-                      <Picker.Item value={PositionType.Long} label="Long" />
-                      <Picker.Item value={PositionType.Short} label="Short" />
-                    </Picker>
+                      <SelectPicker.Item value={PositionType.Long} label="Long" />
+                      <SelectPicker.Item value={PositionType.Short} label="Short" />
+                    </SelectPicker>
                   }
                 </View>
               </Card.Content>
@@ -199,7 +237,7 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
       </View>
 
       <Button 
-        disabled={true}
+        disabled={!validateCalculatorInput(screenState.calculatorInput)}
         mode="contained" 
         style={Style.nextScreenButton} 
         onPress={() => {}}
