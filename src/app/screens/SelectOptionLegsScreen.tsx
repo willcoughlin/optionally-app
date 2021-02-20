@@ -4,7 +4,7 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { ActivityIndicator, Button, Card, Headline, Subheading, Title } from 'react-native-paper';
+import { ActivityIndicator, Button, Headline, HelperText, Subheading, Title } from 'react-native-paper';
 import OptionSelector from '../components/OptionSelector';
 import UnderlyingSelectionView from '../components/UnderlyingSelectionView';
 import { OptionsChainQueryData, OPTIONS_CHAIN_QUERY, PartialOptionsForExpiry } from '../graphql/queries';
@@ -25,40 +25,63 @@ type SelectOptionLegsScreenState = {
   isShortStrategy: boolean;
 };
 
+type CalculatorInputValidationDetails = [hasError: boolean, message?: string];
+
 /* Helpers */
-const validateCalculatorInput = (calculatorInput: CalculatorInput): boolean => {
+const validateCalculatorInput = (calculatorInput: CalculatorInput): CalculatorInputValidationDetails => {
   switch (calculatorInput.strategy) {
     // Call needs long call or short call
     case StrategyType.Call:
-      return !!calculatorInput.longCall || !!calculatorInput.shortCall;
+      return [!(calculatorInput.longCall || calculatorInput.shortCall)];
     // Put needs long put or short put
     case StrategyType.Put:
-      return !!calculatorInput.longPut || !!calculatorInput.longPut;
+      return [!(calculatorInput.longPut || calculatorInput.longPut)];
     // Straddle/Strangle needs long call and long put, or short call and short put, with call strike >= put strike
     case StrategyType.StraddleStrangle:
+      const strikeErrorMsg = 'Call strike must be at or above put strike';
       if (calculatorInput.longCall && calculatorInput.longPut)
-        return calculatorInput.longCall.strike >= calculatorInput.longPut.strike;
+        return [calculatorInput.longCall.strike < calculatorInput.longPut.strike, strikeErrorMsg];
       if (calculatorInput.shortCall && calculatorInput.shortPut)
-        return calculatorInput.shortCall.strike >= calculatorInput.shortPut.strike;
-      return false;
+        return [calculatorInput.shortCall.strike < calculatorInput.shortPut.strike, strikeErrorMsg];
+      return [false];
     // Bull call spread needs long call and short call, with long strike <= short strike
     case StrategyType.BullCallSpread:
-      return !!calculatorInput.longCall && !!calculatorInput.shortCall && (calculatorInput.longCall.strike <= calculatorInput.shortCall.strike);
+      if (calculatorInput.longCall && calculatorInput.shortCall)
+        return [calculatorInput.longCall.strike > calculatorInput.shortCall.strike, 'Long call strike must be below short call strike'];
+      return [false];
     // Bear call spread needs long call and short call, with long strike >= short strike
     case StrategyType.BearCallSpread:
-      return !!calculatorInput.longCall && !!calculatorInput.shortCall && (calculatorInput.longCall.strike >= calculatorInput.shortCall.strike);
+      if (calculatorInput.longCall && calculatorInput.shortCall)
+        return [calculatorInput.longCall.strike < calculatorInput.shortCall.strike, 'Long call strike must be above short call strike'];
+      return [false];
     // Bear put spread needs long put and short put, with long strike >= short strike
     case StrategyType.BearPutSpread:
-      return !!calculatorInput.longPut && !!calculatorInput.shortPut && (calculatorInput.longPut.strike >= calculatorInput.shortPut.strike);
+      if (calculatorInput.longPut && calculatorInput.shortPut)
+        return [calculatorInput.longPut.strike < calculatorInput.shortPut.strike, 'Long put strike must be above short put strike'];
+      return [false];
     // Bull put spread needs long put and short put, with long strike <= short strike
     case StrategyType.BullPutSpread:
-      return !!calculatorInput.longPut && !!calculatorInput.shortPut && (calculatorInput.longPut.strike <= calculatorInput.shortPut.strike);
-    // Iron condor needs all components with long call strike >= short call strike and long put strike <= short put strike
+      if (calculatorInput.longPut && calculatorInput.shortPut)
+        return [calculatorInput.longPut.strike > calculatorInput.shortPut.strike, 'Long put strike must be below short put strike'];
+      return [false];
+    // Iron condor needs all components with long call strike >= short call strike >= short put strike >= long put strike
     case StrategyType.IronCondor:
-      return !!calculatorInput.longCall && !!calculatorInput.shortCall && !!calculatorInput.longPut && !!calculatorInput.shortPut
-        && (calculatorInput.longCall.strike >= calculatorInput.shortCall.strike) && (calculatorInput.longPut.strike <= calculatorInput.shortPut.strike);
+      if (calculatorInput.longCall && calculatorInput.shortCall && calculatorInput.longPut && calculatorInput.shortPut) {
+        let result: CalculatorInputValidationDetails;
+        // Is short call strike >= short put strike?
+        result = [calculatorInput.shortCall.strike < calculatorInput.shortPut.strike, 'Short call strike must be above short put strike'];
+        if (result[0])
+          return result;
+        // Is long call strike >= short call strike?
+        result = [calculatorInput.longCall.strike < calculatorInput.shortCall.strike, 'Long call strike must be above short call strike'];
+        if (result[0])
+          return result;
+        // Is short put strike >= long put strike?
+        return [calculatorInput.longPut.strike > calculatorInput.shortPut.strike, 'Long put strike must be below short put strike'];
+      }
+      return [false];
     default:
-      return false;
+      return [false];
   }
 }
 
@@ -77,6 +100,8 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
       fetchPolicy: 'no-cache',
       variables: { symbol: route.params.underlying.symbol }
     });
+
+  const [inputHasError, inputErrorMessage] = validateCalculatorInput(screenState.calculatorInput);
 
   return (
     <View style={Style.container}>
@@ -232,14 +257,19 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
         }
       </View>
 
-      <Button 
-        disabled={!validateCalculatorInput(screenState.calculatorInput)}
-        mode="contained" 
-        style={Style.nextScreenButton} 
-        onPress={() => {}}
-      >
-        Next
-      </Button>
+      <View>
+        <HelperText type="error" visible={inputHasError} style={{ textAlign: 'center' }}>
+          {inputErrorMessage}
+        </HelperText>
+        <Button 
+          disabled={inputHasError}
+          mode="contained" 
+          style={Style.nextScreenButton} 
+          onPress={() => {}}
+        >
+          Next
+        </Button>
+      </View>
     </View>
   );
 };
