@@ -1,9 +1,10 @@
 import { useLazyQuery } from '@apollo/client';
+import { useTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Keyboard, KeyboardAvoidingView, View } from 'react-native';
-import { ActivityIndicator, Button, Card, Headline, List, Searchbar, Subheading } from 'react-native-paper';
-import UnderlyingSelectionCard from '../components/UnderlyingSelectionCard';
+import { ActivityIndicator, Button, Card, Headline, List, Searchbar, Subheading, TextInput } from 'react-native-paper';
+import UnderlyingSelectionView from '../components/UnderlyingSelectionView';
 import { LookupQueryData, LOOKUP_QUERY, UnderlyingPriceQueryData, UNDERLYING_PRICE_QUERY } from '../graphql/queries';
 import { LookupResult, QueryLookupArgs, QueryStockArgs, Stock } from '../graphql/types';
 import Style from '../style';
@@ -57,8 +58,8 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
     <KeyboardAvoidingView style={Style.container}>
       <View>
         <Headline>First things first</Headline>
-        <Subheading>Choose an underlying stock/ETF</Subheading>
-        <Searchbar 
+        <Subheading style={Style.standardTopMargin}>Choose an underlying stock/ETF</Subheading>
+        <Searchbar
           placeholder="Symbol"
           value={selectionState.symbolInput}
           onChangeText={text => setSelectionState({ symbolInput: text })}
@@ -95,9 +96,9 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
         {/* If price loading, show indicator */}
         {priceLoading && <ActivityIndicator style={{ marginTop: 10 }} animating={true} />}
 
-        {/* If price done loading, show card */}
+        {/* If price done loading, show selection */}
         {selectionState.symbolSelection &&
-          <UnderlyingSelectionCard
+          <UnderlyingSelectionView
             name={selectionState.symbolSelection.name}
             symbol={selectionState.symbolSelection.symbol}
             exchange={selectionState.symbolSelection.exchange}

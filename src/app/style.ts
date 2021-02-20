@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const Style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingBottom: 20
@@ -16,7 +16,7 @@ const Style = StyleSheet.create({
     justifyContent: 'space-between'
   },
   nextScreenButton: {
-    marginTop: 50
+    // marginTop: 50
   },
   navigationHeader: {
     elevation: 0,

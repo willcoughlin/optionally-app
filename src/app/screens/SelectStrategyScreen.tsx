@@ -26,25 +26,27 @@ const SelectStrategyScreen = ({ route, navigation }: SelectStrategyScreenProps) 
     <View style={Style.container}>
       <View>
         <Headline>Now, choose a strategy</Headline>
-        <RadioButton.Group  onValueChange={(newSelection) => setSelection(newSelection)} value={selection}>
-          <Subheading>Basic</Subheading>
-          {[
-            StrategyType.Call, 
-            StrategyType.Put, 
-            StrategyType.StraddleStrangle
-          ].map(radioItemMapper)}
-          
-          {/* <Subheading>Vertical Spreads</Subheading>
-          {[
-            StrategyType.BullCallSpread, 
-            StrategyType.BearCallSpread, 
-            StrategyType.BearPutSpread,
-            StrategyType.BullPutSpread
-          ].map(radioItemMapper)}
+        <View style={Style.standardTopMargin}>
+          <RadioButton.Group onValueChange={(newSelection) => setSelection(newSelection)} value={selection}>
+            <Subheading>Basic</Subheading>
+            {[
+              StrategyType.Call, 
+              StrategyType.Put, 
+              StrategyType.StraddleStrangle
+            ].map(radioItemMapper)}
+            
+            <Subheading>Vertical Spreads</Subheading>
+            {[
+              StrategyType.BullCallSpread, 
+              StrategyType.BearCallSpread, 
+              StrategyType.BearPutSpread,
+              StrategyType.BullPutSpread
+            ].map(radioItemMapper)}
 
-          <Subheading>Other</Subheading>
-          {[StrategyType.IronCondor].map(radioItemMapper)} */}
-        </RadioButton.Group>
+            <Subheading>Other</Subheading>
+            {[StrategyType.IronCondor].map(radioItemMapper)}
+          </RadioButton.Group>
+        </View>
       </View>
 
       <Button 

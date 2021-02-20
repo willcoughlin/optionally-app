@@ -2,11 +2,11 @@ import { useQuery } from '@apollo/client';
 import { Picker as SelectPicker } from '@react-native-picker/picker';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
-import { ActivityIndicator, Button, Card, Headline, Subheading } from 'react-native-paper';
+import { ActivityIndicator, Button, Card, Headline, Subheading, Title } from 'react-native-paper';
 import OptionSelector from '../components/OptionSelector';
-import UnderlyingSelectionCard from '../components/UnderlyingSelectionCard';
+import UnderlyingSelectionView from '../components/UnderlyingSelectionView';
 import { OptionsChainQueryData, OPTIONS_CHAIN_QUERY, PartialOptionsForExpiry } from '../graphql/queries';
 import { CalculatorInput, OptionType, QueryStockArgs, StrategyType } from '../graphql/types';
 import Style from '../style';
@@ -84,8 +84,7 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
         <Headline>Finally, choose your options</Headline>
 
         {/* Underlying card */}
-        <UnderlyingSelectionCard 
-          style={{ marginTop: 0 }}
+        <UnderlyingSelectionView 
           name={route.params.underlying.name}
           symbol={route.params.underlying.symbol} 
           exchange={route.params.underlying.exchange} 
@@ -100,34 +99,31 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
         {optionsChainData && 
           <>  
             {/* Strategy display card */}
-            <Card style={Style.standardTopMargin}>
-              <Card.Title title="Strategy" />
-              <Card.Content>
-                <View style={{ 
-                  flexDirection: 'row', 
-                  justifyContent: screenState.showShortRadio ? 'space-between': 'flex-start',
-                  alignItems: 'center'
-                }}>
-                  <Subheading>{STRATEGY_DISPLAY_NAMES[route.params.strategy]}</Subheading>
-                  
-                  {/* Show a picker if we need to choose long/short for strategy */}
-                  {screenState.showShortRadio && 
-                    <SelectPicker
-                      style={{ padding: 0, width: '50%' }}
-                      selectedValue={screenState.isShortStrategy ? PositionType.Short : PositionType.Long}
-                      onValueChange={newSelection => setScreenState({ ...screenState, isShortStrategy: newSelection == PositionType.Short })}
-                    >
-                      <SelectPicker.Item value={PositionType.Long} label="Long" />
-                      <SelectPicker.Item value={PositionType.Short} label="Short" />
-                    </SelectPicker>
-                  }
-                </View>
-              </Card.Content>
-            </Card>
+            <View style={Style.standardTopMargin}>
+              <Title>Strategy</Title>
+              <View style={{ 
+                flexDirection: 'row', 
+                justifyContent: screenState.showShortRadio ? 'space-between': 'flex-start',
+                alignItems: 'center'
+              }}>
+                <Subheading>{STRATEGY_DISPLAY_NAMES[route.params.strategy]}</Subheading>
+                
+                {/* Show a picker if we need to choose long/short for strategy */}
+                {screenState.showShortRadio && 
+                  <SelectPicker
+                    style={{ padding: 0, width: '50%' }}
+                    selectedValue={screenState.isShortStrategy ? PositionType.Short : PositionType.Long}
+                    onValueChange={newSelection => setScreenState({ ...screenState, isShortStrategy: newSelection == PositionType.Short })}
+                  >
+                    <SelectPicker.Item value={PositionType.Long} label="Long" />
+                    <SelectPicker.Item value={PositionType.Short} label="Short" />
+                  </SelectPicker>
+                }
+              </View>
+            </View>
 
             {/* Configure option legs below info cards */}
-            <View style={Style.standardTopMargin}>
-
+            <View>
               {/* Show single option selector for Call or Put strategy */}
               {[StrategyType.Call, StrategyType.Put].includes(route.params.strategy) && 
                 <OptionSelector
