@@ -18,8 +18,7 @@ const client = new ApolloClient({
   uri: Variables.serverUrl,
   cache: new InMemoryCache({
     typePolicies: {
-      LookupResult: { keyFields: ['symbol', 'exchange'] },
-      Stock: { keyFields: false }  // do not normalize Stock quotes, as they are time dependent
+      LookupResult: { keyFields: ['symbol', 'exchange'] }
     }
   })
 });
