@@ -97,7 +97,7 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
         {priceLoading && <ActivityIndicator style={{ marginTop: 10 }} animating={true} />}
 
         {/* If price done loading, show selection */}
-        {selectionState.symbolSelection &&
+        {selectionState.symbolSelection && !priceLoading &&
           <UnderlyingSelectionView
             name={selectionState.symbolSelection.name}
             symbol={selectionState.symbolSelection.symbol}

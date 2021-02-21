@@ -35,7 +35,7 @@ const validateCalculatorInput = (calculatorInput: CalculatorInput): CalculatorIn
       return [!(calculatorInput.longCall || calculatorInput.shortCall)];
     // Put needs long put or short put
     case StrategyType.Put:
-      return [!(calculatorInput.longPut || calculatorInput.longPut)];
+      return [!(calculatorInput.longPut || calculatorInput.shortPut)];
     // Straddle/Strangle needs long call and long put, or short call and short put, with call strike >= put strike
     case StrategyType.StraddleStrangle:
       const strikeErrorMsg = 'Call strike must be at or above put strike';
@@ -161,7 +161,7 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
                       ...screenState.calculatorInput,
                       ...(route.params.strategy == StrategyType.Call && !screenState.isShortStrategy && { longCall: selection }),
                       ...(route.params.strategy == StrategyType.Call && screenState.isShortStrategy && { shortCall: selection }),
-                      ...(route.params.strategy == StrategyType.Put && screenState.isShortStrategy && { longPut: selection }),
+                      ...(route.params.strategy == StrategyType.Put && !screenState.isShortStrategy && { longPut: selection }),
                       ...(route.params.strategy == StrategyType.Put && screenState.isShortStrategy && { shortPut: selection })
                     }
                   })} />
