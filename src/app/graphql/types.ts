@@ -52,7 +52,7 @@ export type CalculatorResult = {
   entryCost: Scalars['Float'];
   maxRisk?: Maybe<Scalars['Float']>;
   maxReturn?: Maybe<Scalars['Float']>;
-  breakEvenAtExpiry: Scalars['Float'];
+  breakEvenAtExpiry: Array<Scalars['Float']>;
   returnsTable: Array<ReturnsForDateByStrike>;
 };
 

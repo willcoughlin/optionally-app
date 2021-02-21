@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { DeepPartial } from "../types";
-import { LookupResult, MakeOptional, Option, OptionsForExpiry, Stock } from "./types";
+import { CalculatorResult, LookupResult, OptionsForExpiry, Stock } from "./types";
 
 export const LOOKUP_QUERY = gql`
   query LookupQuery($query: String!) {
@@ -58,4 +58,21 @@ export type OptionsChainQueryData = {
   stock: {
     optionsChain: PartialOptionsForExpiry[];
   }
+};
+
+export const CALCULATE_RETURNS_QUERY = gql`
+  query CalculateReturnsQuery($input: CalculatorInput!) {
+    calculateReturns(input: $input) {
+      entryCost
+      maxRisk
+      maxReturn
+      breakEvenAtExpiry
+    }
+  }
+`;
+
+export type PartialCalculatorResults = Partial<CalculatorResult> & Pick<CalculatorResult, 'entryCost' | 'maxRisk' | 'maxReturn' | 'breakEvenAtExpiry'>;
+
+export type CalculateReturnsQueryData = {
+  calculateReturns: PartialCalculatorResults;
 };
