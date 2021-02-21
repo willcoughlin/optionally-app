@@ -1,11 +1,14 @@
+import { useQuery } from '@apollo/client';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
-import { useQuery } from 'react-apollo-hooks';
 import { View } from 'react-native';
-import { Headline } from 'react-native-paper';
+import { Button, ActivityIndicator, Headline, Text, Subheading } from 'react-native-paper';
+import { CalculateReturnsQueryData, CALCULATE_RETURNS_QUERY } from '../graphql/queries';
+import { QueryCalculateReturnsArgs } from '../graphql/types';
 import Style from '../style';
 import { StackParamList } from '../types';
+import { formatDollarAmount } from '../util';
 
 /* Related types */
 type ViewResultsScreenProps = {
@@ -15,11 +18,51 @@ type ViewResultsScreenProps = {
 
 /* Define screen */
 const ViewResultsScreen = ({ route, navigation }: ViewResultsScreenProps) => {
-  // const { loading, error, data } = useQuery()
+  const { loading, error, data } = useQuery<CalculateReturnsQueryData, QueryCalculateReturnsArgs>(
+    CALCULATE_RETURNS_QUERY, {
+      variables: {
+        input: route.params.calculatorInput
+      }
+    });
 
   return (
-    <View style={[Style.container, { justifyContent: 'flex-start' }]}>
-      <Headline>Here are your results</Headline>
+    <View style={Style.container}>
+      {loading && <ActivityIndicator animating />}
+      {!loading && data &&
+        <>
+          <View>
+            <Headline>Here are your results</Headline>
+            <View style={[Style.standardTopMargin, Style.flexRowSpaceBetween]}>
+              <Subheading style={{ fontWeight: 'bold' }}>{data.calculateReturns.entryCost < 0 ? 'Premium received' : 'Entry cost'}</Subheading>
+              <Subheading>{formatDollarAmount(Math.abs(data.calculateReturns.entryCost))}</Subheading>
+            </View>
+            <View style={Style.flexRowSpaceBetween}>
+              <Subheading style={{ fontWeight: 'bold' }}>Maximum profit</Subheading>
+              <Subheading>{data.calculateReturns.maxReturn ? formatDollarAmount(data.calculateReturns.maxReturn) : 'Unlimited'}</Subheading>
+            </View>
+            <View style={Style.flexRowSpaceBetween}>
+              <Subheading style={{ fontWeight: 'bold' }}>Maximum loss</Subheading>
+              <Subheading>{data.calculateReturns.maxRisk ? formatDollarAmount(data.calculateReturns.maxRisk) : 'Unlimited'}</Subheading>
+            </View>
+            <View style={Style.flexRowSpaceBetween}>
+              <Subheading style={{ fontWeight: 'bold' }}>{data.calculateReturns.breakEvenAtExpiry.length > 1 ? 'Upper break-even' : 'Break-even'}</Subheading>
+              <Subheading>{formatDollarAmount(data.calculateReturns.breakEvenAtExpiry[0])}</Subheading>
+            </View>
+            {data.calculateReturns.breakEvenAtExpiry.length > 1 &&
+              <View style={Style.flexRowSpaceBetween}>
+                <Subheading style={{ fontWeight: 'bold' }}>Lower break-even</Subheading>
+                <Subheading>{formatDollarAmount(data.calculateReturns.breakEvenAtExpiry[1])}</Subheading>
+              </View> 
+            }
+          </View>
+          <Button 
+            mode="outlined"
+            onPress={() => {}}
+          >
+            Start Over
+          </Button>
+        </>
+      }
     </View>
   );
 };

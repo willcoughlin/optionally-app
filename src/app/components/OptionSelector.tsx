@@ -1,4 +1,5 @@
 import { Picker as SelectPicker } from '@react-native-picker/picker';
+import moment from 'moment';
 import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Button, Caption, List, Modal, Portal, Subheading, Title } from 'react-native-paper';
@@ -90,7 +91,7 @@ const OptionSelector = (props: OptionSelectorProps) => {
               });
             }}
           >
-            {props.options.map(optionsForExpiry => (
+            {props.options.filter(optionsForExpiry => moment(optionsForExpiry.expiry).isSameOrAfter(moment(), 'd')).map(optionsForExpiry => (
               <SelectPicker.Item 
                 key={optionsForExpiry.expiry} 
                 value={optionsForExpiry.expiry} 

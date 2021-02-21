@@ -13,7 +13,8 @@ const Style = StyleSheet.create({
   },
   flexRowSpaceBetween: {
     flexDirection: 'row', 
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'baseline'
   },
   nextScreenButton: {
     // marginTop: 50
