@@ -9,7 +9,7 @@ const Variables: EnvironmentVariables = __DEV__
   }) 
   : ({
     // Prod variables 
-    serverUrl: ''
+    serverUrl: 'https://api.optionally.com/graphql'
   });
 
 export default Variables;
