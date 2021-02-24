@@ -4,7 +4,7 @@ import { createStackNavigator, TransitionPresets } from '@react-navigation/stack
 import { registerRootComponent } from 'expo';
 import React from 'react';
 import { Image } from 'react-native';
-import { ProgressBar, Provider as PaperProvider } from 'react-native-paper';
+import { IconButton, ProgressBar, Provider as PaperProvider } from 'react-native-paper';
 import SelectOptionLegsScreen from './screens/SelectOptionLegsScreen';
 import SelectStrategyScreen from './screens/SelectStrategyScreen';
 import SelectUnderlyingScreen from './screens/SelectUnderlyingScreen';
@@ -12,6 +12,8 @@ import ViewResultsScreen from './screens/ViewResultsScreen';
 import Style from './style';
 import { StackParamList } from './types';
 import Variables from './variables';
+import { Ionicons } from '@expo/vector-icons';
+import 'react-native-gesture-handler';
 
 const Stack = createStackNavigator<StackParamList>();
 
@@ -33,8 +35,9 @@ const App = () => (
           headerMode="float" 
           screenOptions={{ 
             headerStyle: Style.navigationHeader,
-            ...TransitionPresets.SlideFromRightIOS, 
-            }}>
+            ...TransitionPresets.SlideFromRightIOS,
+            headerRight: () => <IconButton size={35} icon={() => <Ionicons size={20} name="ellipsis-vertical" />} onPress={() => {}} />
+          }}>
           
           <Stack.Screen 
             name="SelectUnderlyingScreen" 

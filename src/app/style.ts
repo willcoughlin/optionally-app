@@ -25,7 +25,7 @@ const Style = StyleSheet.create({
     borderBottomWidth: 0
   },
   navigationProgressBar : {
-    marginRight: 56
+    // marginRight: 56
   }
 });
 
