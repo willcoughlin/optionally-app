@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import { registerRootComponent } from 'expo';
 import React from 'react';
+import { Image } from 'react-native';
 import { ProgressBar, Provider as PaperProvider } from 'react-native-paper';
 import SelectOptionLegsScreen from './screens/SelectOptionLegsScreen';
 import SelectStrategyScreen from './screens/SelectStrategyScreen';
@@ -38,7 +39,10 @@ const App = () => (
           <Stack.Screen 
             name="SelectUnderlyingScreen" 
             component={SelectUnderlyingScreen} 
-            options={{ headerTitle: () => <ProgressBar style={[Style.navigationProgressBar, { marginLeft: 56 }]} progress={0} /> }} 
+            options={{ 
+              headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={0} />,
+              headerLeft: () => <Image source={require('../../assets/icon-monochrome.png')} style={{ height: '60%' }} resizeMode="contain" />,
+            }} 
             />
 
           <Stack.Screen 
