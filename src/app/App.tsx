@@ -1,21 +1,15 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { registerRootComponent } from 'expo';
 import React from 'react';
-import { Image } from 'react-native';
-import { IconButton, ProgressBar, Provider as PaperProvider } from 'react-native-paper';
-import SelectOptionLegsScreen from './screens/SelectOptionLegsScreen';
-import SelectStrategyScreen from './screens/SelectStrategyScreen';
-import SelectUnderlyingScreen from './screens/SelectUnderlyingScreen';
-import ViewResultsScreen from './screens/ViewResultsScreen';
-import Style from './style';
-import { StackParamList } from './types';
-import Variables from './variables';
-import { Ionicons } from '@expo/vector-icons';
 import 'react-native-gesture-handler';
+import { Provider as PaperProvider } from 'react-native-paper';
+import EllipsisMenuStackNavigator from './screens/EllipsisMenuStackNavigator';
+import MainStackNavigator from './screens/MainStackNavigator';
+import Variables from './variables';
 
-const Stack = createStackNavigator<StackParamList>();
+const RootStack = createStackNavigator();
 
 // Initialize Apollo Client
 const client = new ApolloClient({
@@ -31,41 +25,14 @@ const App = () => (
   <ApolloProvider client={client}>
     <PaperProvider>
       <NavigationContainer>
-        <Stack.Navigator 
-          headerMode="float" 
-          screenOptions={{ 
-            headerStyle: Style.navigationHeader,
-            ...TransitionPresets.SlideFromRightIOS,
-            headerRight: () => <IconButton size={35} icon={() => <Ionicons size={20} name="ellipsis-vertical" />} onPress={() => {}} />
-          }}>
-          
-          <Stack.Screen 
-            name="SelectUnderlyingScreen" 
-            component={SelectUnderlyingScreen} 
-            options={{ 
-              headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={0} />,
-              headerLeft: () => <Image source={require('../../assets/icon-monochrome.png')} style={{ height: '60%' }} resizeMode="contain" />,
-            }} 
-            />
-
-          <Stack.Screen 
-            name="SelectStrategyScreen" 
-            component={SelectStrategyScreen} 
-            options={{ headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={0.25} /> }} 
-            />
-
-          <Stack.Screen 
-            name="SelectOptionLegsScreen" 
-            component={SelectOptionLegsScreen} 
-            options={{ headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={0.51} /> }} 
-            />
-
-          <Stack.Screen 
-            name="ViewResultsScreen" 
-            component={ViewResultsScreen} 
-            options={{ headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={1} /> }} 
-          />
-        </Stack.Navigator>
+        <RootStack.Navigator mode="modal" headerMode="none">
+          <RootStack.Screen
+            name="MainStackNavigator"
+            component={MainStackNavigator} />
+          <RootStack.Screen
+            name="EllipsisMenuStackNavigator"
+            component={EllipsisMenuStackNavigator} />
+        </RootStack.Navigator>
       </NavigationContainer>
     </PaperProvider>  
   </ApolloProvider>

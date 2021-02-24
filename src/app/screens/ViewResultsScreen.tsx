@@ -7,13 +7,13 @@ import { Button, ActivityIndicator, Headline, Text, Subheading } from 'react-nat
 import { CalculateReturnsQueryData, CALCULATE_RETURNS_QUERY } from '../graphql/queries';
 import { QueryCalculateReturnsArgs } from '../graphql/types';
 import Style from '../style';
-import { StackParamList } from '../types';
+import { MainStackParamList } from '../types';
 import { formatDollarAmount } from '../util';
 
 /* Related types */
 type ViewResultsScreenProps = {
-  route: RouteProp<StackParamList, 'ViewResultsScreen'>;
-  navigation: StackNavigationProp<StackParamList, 'ViewResultsScreen'>;
+  route: RouteProp<MainStackParamList, 'ViewResultsScreen'>;
+  navigation: StackNavigationProp<MainStackParamList, 'ViewResultsScreen'>;
 };
 
 /* Define screen */

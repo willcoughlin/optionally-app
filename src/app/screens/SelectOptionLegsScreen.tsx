@@ -10,12 +10,12 @@ import UnderlyingSelectionView from '../components/UnderlyingSelectionView';
 import { OptionsChainQueryData, OPTIONS_CHAIN_QUERY, PartialOptionsForExpiry } from '../graphql/queries';
 import { CalculatorInput, OptionType, QueryStockArgs, StrategyType } from '../graphql/types';
 import Style from '../style';
-import { PositionType, StackParamList, STRATEGY_DISPLAY_NAMES } from '../types';
+import { MainStackParamList, PositionType, STRATEGY_DISPLAY_NAMES } from '../types';
 
 /* Related types */
 type SelectOptionLegsScreenProps = {
-  route: RouteProp<StackParamList, 'SelectOptionLegsScreen'>;
-  navigation: StackNavigationProp<StackParamList, 'SelectOptionLegsScreen'>;
+  route: RouteProp<MainStackParamList, 'SelectOptionLegsScreen'>;
+  navigation: StackNavigationProp<MainStackParamList, 'SelectOptionLegsScreen'>;
 };
 
 type SelectOptionLegsScreenState = {

@@ -16,7 +16,12 @@ export type ViewResultsScreenParams = {
   calculatorInput: CalculatorInput
 };
 
-export type StackParamList = {
+export type RootStackParamList = {
+  MainStackNavigator: undefined;
+  EllipsisMenuStackNavigator: undefined;
+};
+
+export type MainStackParamList = {
   SelectUnderlyingScreen: undefined;
   SelectStrategyScreen: SelectStrategyScreenParams;
   SelectOptionLegsScreen: SelectOptionLegsScreenParams;

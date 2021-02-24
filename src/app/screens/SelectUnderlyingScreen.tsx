@@ -7,10 +7,10 @@ import UnderlyingSelectionView from '../components/UnderlyingSelectionView';
 import { LookupQueryData, LOOKUP_QUERY, UnderlyingPriceQueryData, UNDERLYING_PRICE_QUERY } from '../graphql/queries';
 import { LookupResult, QueryLookupArgs, QueryStockArgs, Stock } from '../graphql/types';
 import Style from '../style';
-import { StackParamList } from '../types';
+import { MainStackParamList } from '../types';
 
 type SelectUnderlyingScreenProps = {
-  navigation: StackNavigationProp<StackParamList, 'SelectUnderlyingScreen'>;
+  navigation: StackNavigationProp<MainStackParamList, 'SelectUnderlyingScreen'>;
 };
 
 type SelectUnderlyingScreenState = {
