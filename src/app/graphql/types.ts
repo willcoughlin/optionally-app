@@ -53,14 +53,7 @@ export type CalculatorResult = {
   maxRisk?: Maybe<Scalars['Float']>;
   maxReturn?: Maybe<Scalars['Float']>;
   breakEvenAtExpiry: Array<Scalars['Float']>;
-  returnsTable: Array<ReturnsForDateByStrike>;
-};
-
-export type ReturnsForDateByStrike = {
-  __typename?: 'ReturnsForDateByStrike';
-  date: Scalars['String'];
-  returnInDollars: Scalars['Float'];
-  returnInPercent: Scalars['Float'];
+  returnsTable: Array<Array<Scalars['Float']>>;
 };
 
 export type LookupResult = {
@@ -99,6 +92,9 @@ export type OptionInput = {
   currentPrice: Scalars['Float'];
   strike: Scalars['Float'];
   expiry: Scalars['String'];
+  underlyingPrice: Scalars['Float'];
+  impliedVolatility: Scalars['Float'];
+  type: OptionType;
 };
 
 export type Query = {
