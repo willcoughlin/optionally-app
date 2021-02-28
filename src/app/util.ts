@@ -8,10 +8,15 @@ export function formatDollarAmount(amount: number) {
   return '$' + amount.toFixed(2);
 }
 
+export function toFixedNoNegativeZero(num: number, precision: number) {
+  const toFixedResult = num.toFixed(precision);
+  return toFixedResult == '-0.' + '0'.repeat(precision) ? toFixedResult.replace('-', '') : toFixedResult;
+}
+
 export function mapPercentToRedGreenGradient(pct: number) {
   const percentColors = [
-    { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
-    { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
+    { pct: -1.0, color: { r: 0xff, g: 0x00, b: 0 } },
+    { pct: 0, color: { r: 0xff, g: 0xff, b: 0 } },
     { pct: 1.0, color: { r: 0x00, g: 0xff, b: 0 } } 
   ];
 
