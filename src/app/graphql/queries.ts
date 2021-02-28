@@ -73,12 +73,11 @@ export const CALCULATE_RETURNS_QUERY = gql`
       maxRisk
       maxReturn
       breakEvenAtExpiry
+      returnsTable
     }
   }
 `;
 
-export type PartialCalculatorResults = Partial<CalculatorResult> & Pick<CalculatorResult, 'entryCost' | 'maxRisk' | 'maxReturn' | 'breakEvenAtExpiry'>;
-
 export type CalculateReturnsQueryData = {
-  calculateReturns: PartialCalculatorResults;
+  calculateReturns: CalculatorResult;
 };
