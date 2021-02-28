@@ -1,12 +1,14 @@
 import React, { createRef } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Text } from 'react-native-paper';
 import { Cell, Col, Row, Table, TableWrapper } from 'react-native-table-component';
 import { mapPercentToRedGreenGradient } from '../util';
 
 type ScrollableTableProps = {
-  tableData: string[][];
-  rowHeaders: string[];
+  entryPrice: number;
+  tableData: number[][];
+  rowHeaders: number[];
   columnHeaders: string[];
   dataCellWidth: number;
   dataCellHeight: number;
@@ -16,11 +18,15 @@ type ScrollableTableProps = {
 };
 
 const ScrollableTable = (props: ScrollableTableProps) => {
+  // Refs and flags for linked ScrollViews
   const headerRowScrollViewRef = createRef<ScrollView>();
   const dataCellsHorizontalScrollViewRef = createRef<ScrollView>();
-
   let isHeaderRowScrolling = false;
   let areDataCellsHorizontallyScrolling = false;
+
+  // Math for corner cell diagonal line
+  const cornerCellHypotenuse = Math.hypot(props.headerRowHeight, props.headerColumnWidth + 1);
+  const cornerCellAngle = Math.asin(props.headerRowHeight / cornerCellHypotenuse);
 
   return (
     <View style={[{ borderWidth: 1, borderRightWidth: 2 }, props.containerStyle]}>
@@ -30,8 +36,25 @@ const ScrollableTable = (props: ScrollableTableProps) => {
         <View style={{ 
           minHeight: props.headerRowHeight, 
           minWidth: props.headerColumnWidth + 1, // minWidth is bumped up to account for some width weirdness
-          borderWidth: 1 }}
-        ></View>
+          borderWidth: 1,
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          paddingLeft: 5,
+          paddingRight: 5
+        }}>
+          <Text style={{ fontWeight: 'bold', fontSize: 14, textAlign: 'right' }}>Date</Text>
+          <View style={{
+            position: 'absolute',
+            top: 20,
+            left: -5,
+            height: 1,
+            width: cornerCellHypotenuse,
+            transform: [ { rotate: cornerCellAngle + 'rad'}],
+            borderBottomColor: '#000',
+            borderBottomWidth: 1
+          }}></View>
+          <Text style={{ fontWeight: 'bold', fontSize: 14 }}>$</Text>
+        </View>
         {/* Horizontally scrollable top header row */}
         <ScrollView horizontal ref={headerRowScrollViewRef} scrollEventThrottle={0} showsHorizontalScrollIndicator={false}
           onScroll={e => {
@@ -58,7 +81,7 @@ const ScrollableTable = (props: ScrollableTableProps) => {
           <Table borderStyle={style.tableBorders}>
             <Col 
               textStyle={style.headerText}
-              data={props.rowHeaders} 
+              data={props.rowHeaders.map(rh => rh.toFixed(2))} 
               width={props.headerColumnWidth} 
               heightArr={Array(props.rowHeaders.length).fill(props.dataCellHeight)} />
           </Table>
@@ -77,12 +100,13 @@ const ScrollableTable = (props: ScrollableTableProps) => {
               {props.tableData.map((row, i) => (
                 <TableWrapper key={i} style={style.flexRow}>
                   {row.map((cell, i) => {
-                    let pctValueToMap = (parseFloat(cell) + 50) / 100;
-                    pctValueToMap = pctValueToMap < 0 ? 0 : pctValueToMap > 1 ? 1 : pctValueToMap;
+                    const pctValueFromPrice = (cell - props.entryPrice) / props.entryPrice;
+                    const pctValueToMap = Math.min(Math.max(pctValueFromPrice, -1), 1);  // bound to [-1, 1]
                     return (
                       <Cell 
                         key={i} 
-                        data={cell} 
+                        // data={toFixedNoNegativeZero(pctValueFromPrice * 100, 1) + '%'} 
+                        data={cell.toFixed(2)}
                         height={props.dataCellHeight} 
                         width={props.dataCellWidth}
                         textStyle={{ textAlign: 'center' }} 

@@ -59,40 +59,12 @@ const ViewResultsScreen = ({ route, navigation }: ViewResultsScreenProps) => {
             <View style={Style.standardTopMargin}>
               <Title>Profit/Loss Table</Title>
               <ScrollableTable 
-                columnHeaders={Array.from(Array(30).keys()).map(i => moment().add(i, 'd').format('MM/DD'))}
-                rowHeaders={Array.from(Array(30).keys()).map(i => ((i * 0.5 + 1)*1).toFixed(2))}
-                tableData={[
-                  Array.from(Array(30).fill('15%')),
-                  Array.from(Array(30).fill('14%')),
-                  Array.from(Array(30).fill('13%')),
-                  Array.from(Array(30).fill('12%')),
-                  Array.from(Array(30).fill('11%')),
-                  Array.from(Array(30).fill('10%')),
-                  Array.from(Array(30).fill('9%')),
-                  Array.from(Array(30).fill('8%')),
-                  Array.from(Array(30).fill('7%')),
-                  Array.from(Array(30).fill('6%')),
-                  Array.from(Array(30).fill('5%')),
-                  Array.from(Array(30).fill('4%')),
-                  Array.from(Array(30).fill('3%')),
-                  Array.from(Array(30).fill('2%')),
-                  Array.from(Array(30).fill('1%')),
-                  Array.from(Array(30).fill('0%')),
-                  Array.from(Array(30).fill('-1%')),
-                  Array.from(Array(30).fill('-2%')),
-                  Array.from(Array(30).fill('-3%')),
-                  Array.from(Array(30).fill('-4%')),
-                  Array.from(Array(30).fill('-5%')),
-                  Array.from(Array(30).fill('-6%')),
-                  Array.from(Array(30).fill('-7%')),
-                  Array.from(Array(30).fill('-8%')),
-                  Array.from(Array(30).fill('-9%')),
-                  Array.from(Array(30).fill('-10%')),
-                  Array.from(Array(30).fill('-11%')),
-                  Array.from(Array(30).fill('-12%')),
-                  Array.from(Array(30).fill('-13%')),
-                  Array.from(Array(30).fill('-14%')),
-                ]} 
+                // columnHeaders={Array.from(Array(30).keys()).map(i => moment().add(i, 'd').format('MM/DD'))}
+                // rowHeaders={Array.from(Array(30).keys()).map(i => ((i * 0.5 + 1)*1).toFixed(2))}
+                columnHeaders={data.calculateReturns.returnsTable.dates.map(d => moment(d).format('MM/DD'))}
+                rowHeaders={data.calculateReturns.returnsTable.underlyingPrices}
+                entryPrice={data.calculateReturns.entryCost}
+                tableData={data.calculateReturns.returnsTable.dataMatrix} 
                 dataCellHeight={40}
                 dataCellWidth={70}
                 headerRowHeight={40}
