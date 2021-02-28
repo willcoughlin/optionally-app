@@ -63,8 +63,6 @@ const OptionSelector = (props: OptionSelectorProps) => {
         mode="outlined"
         onPress={() => setSelectorState({ 
           ...selectorState, 
-          selectedDate: props.options[0].expiry,
-          optionsForExpiry: props.options[0],
           modalVisible: true 
         })}
       >
@@ -117,8 +115,6 @@ const OptionSelector = (props: OptionSelectorProps) => {
                   )} 
                   onPress={() => setSelectorState({
                     ...selectorState,
-                    selectedDate: undefined,
-                    optionsForExpiry: undefined,
                     modalVisible: false,
                     selection: {
                       currentPrice: item?.last ?? 0,
