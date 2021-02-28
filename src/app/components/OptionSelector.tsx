@@ -123,8 +123,11 @@ const OptionSelector = (props: OptionSelectorProps) => {
                     selection: {
                       currentPrice: item?.last ?? 0,
                       expiry: selectorState.selectedDate ?? '',
-                      quantity: 1,
-                      strike: item?.strike ?? 0
+                      strike: item?.strike ?? 0,
+                      underlyingPrice: item?.underlyingPrice ?? 0,
+                      impliedVolatility: item?.impliedVolatility ?? 0,
+                      type: item?.type ?? OptionType.Call,
+                      quantity: 1
                     }
                   })} />
               )} />
