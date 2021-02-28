@@ -73,7 +73,11 @@ export const CALCULATE_RETURNS_QUERY = gql`
       maxRisk
       maxReturn
       breakEvenAtExpiry
-      returnsTable
+      returnsTable {
+        dates
+        underlyingPrices
+        dataMatrix
+      }
     }
   }
 `;

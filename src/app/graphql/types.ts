@@ -53,7 +53,14 @@ export type CalculatorResult = {
   maxRisk?: Maybe<Scalars['Float']>;
   maxReturn?: Maybe<Scalars['Float']>;
   breakEvenAtExpiry: Array<Scalars['Float']>;
-  returnsTable: Array<Array<Scalars['Float']>>;
+  returnsTable: ReturnsTable;
+};
+
+export type ReturnsTable = {
+  __typename?: 'ReturnsTable';
+  dates: Array<Scalars['String']>;
+  underlyingPrices: Array<Scalars['Float']>;
+  dataMatrix: Array<Array<Scalars['Float']>>;
 };
 
 export type LookupResult = {
