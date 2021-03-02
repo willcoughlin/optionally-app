@@ -138,7 +138,17 @@ const SelectOptionLegsScreen = ({ route, navigation }: SelectOptionLegsScreenPro
                   <SelectPicker
                     style={{ padding: 0, width: '50%' }}
                     selectedValue={screenState.isShortStrategy ? PositionType.Short : PositionType.Long}
-                    onValueChange={newSelection => setScreenState({ ...screenState, isShortStrategy: newSelection == PositionType.Short })}
+                    onValueChange={newSelection => setScreenState({ 
+                      ...screenState, 
+                      isShortStrategy: newSelection == PositionType.Short,
+                      calculatorInput: {
+                        strategy: screenState.calculatorInput.strategy,
+                        longCall: screenState.calculatorInput.shortCall,
+                        shortCall : screenState.calculatorInput.longCall,
+                        longPut: screenState.calculatorInput.shortPut,
+                        shortPut: screenState.calculatorInput.longPut
+                      }
+                    })}
                   >
                     <SelectPicker.Item value={PositionType.Long} label="Long" />
                     <SelectPicker.Item value={PositionType.Short} label="Short" />
