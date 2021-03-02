@@ -56,7 +56,7 @@ const ScrollableTable = (props: ScrollableTableProps) => {
           <Text style={{ fontWeight: 'bold', fontSize: 14 }}>$</Text>
         </View>
         {/* Horizontally scrollable top header row */}
-        <ScrollView horizontal ref={headerRowScrollViewRef} scrollEventThrottle={0} showsHorizontalScrollIndicator={false}
+        <ScrollView horizontal directionalLockEnabled ref={headerRowScrollViewRef} showsHorizontalScrollIndicator={false}
           onScroll={e => {
             if (!isHeaderRowScrolling) {
               areDataCellsHorizontallyScrolling = true;
@@ -87,7 +87,7 @@ const ScrollableTable = (props: ScrollableTableProps) => {
           </Table>
       
           {/* Scrollable data cells */}
-          <ScrollView horizontal scrollEventThrottle={0} ref={dataCellsHorizontalScrollViewRef}
+          <ScrollView horizontal directionalLockEnabled ref={dataCellsHorizontalScrollViewRef}
             onScroll={e => {
               if (!areDataCellsHorizontallyScrolling) {
                 isHeaderRowScrolling = true;
@@ -109,7 +109,7 @@ const ScrollableTable = (props: ScrollableTableProps) => {
                         height={props.dataCellHeight} 
                         width={props.dataCellWidth}
                         textStyle={{ textAlign: 'center' }} 
-                        // style={{ backgroundColor: mapPercentToRedGreenGradient(pctValueToMap)}} 
+                        style={{ backgroundColor: mapPercentToRedGreenGradient(pctValueToMap)}} 
                         />
                     ); 
                   })}
