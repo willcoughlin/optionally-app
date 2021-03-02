@@ -115,19 +115,18 @@ const OptionSelector = (props: OptionSelectorProps) => {
                   )} 
                   onPress={() => {
                     setSelectorState({
-                    ...selectorState,
-                    modalVisible: false,
-                    selection: {
-                      currentPrice: (item?.last ?? 0) === 0 
-                        ? (item?.ask && item?.bid) ? (item.ask + item.bid / 2) : 0
-                        : item?.last ?? 0,
-                      expiry: selectorState.selectedDate ?? '',
-                      strike: item?.strike ?? 0,
-                      underlyingPrice: item?.underlyingPrice ?? 0,
-                      underlyingSymbol: item?.underlyingSymbol ?? '',
-                      type: item?.type ?? OptionType.Call,
-                      quantity: 1
-                    }
+                      ...selectorState,
+                      modalVisible: false,
+                      selection: {
+                        currentPrice: (item?.last ?? 0) === 0 
+                          ? (item?.ask && item?.bid) ? (item.ask + item.bid / 2) : 0
+                          : item?.last ?? 0,
+                        expiry: selectorState.selectedDate ?? '',
+                        strike: item?.strike ?? 0,
+                        underlyingPrice: item?.underlyingPrice ?? 0,
+                        type: item?.type ?? OptionType.Call,
+                        quantity: 1
+                      }
                     });
                   }} />
               )} />
