@@ -3,7 +3,7 @@ import { StyleSheet, View, ViewStyle } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Text } from 'react-native-paper';
 import { Cell, Col, Row, Table, TableWrapper } from 'react-native-table-component';
-import { mapPercentToRedGreenGradient } from '../util';
+import { mapPercentToRedGreenGradient, toFixedNoNegativeZero } from '../util';
 
 type ScrollableTableProps = {
   entryPrice: number;
@@ -105,8 +105,7 @@ const ScrollableTable = (props: ScrollableTableProps) => {
                     return (
                       <Cell 
                         key={i} 
-                        // data={toFixedNoNegativeZero(pctValueFromPrice * 100, 1) + '%'} 
-                        data={cell.toFixed(2)}
+                        data={toFixedNoNegativeZero(cell, 2)}
                         height={props.dataCellHeight} 
                         width={props.dataCellWidth}
                         textStyle={{ textAlign: 'center' }} 
