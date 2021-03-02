@@ -68,7 +68,7 @@ const ViewResultsScreen = ({ route, navigation }: ViewResultsScreenProps) => {
                 dataCellWidth={70}
                 headerRowHeight={40}
                 headerColumnWidth={70}
-                containerStyle={{ maxHeight: 400 }} />
+                containerStyle={{ maxHeight: 400, maxWidth: '100%', alignSelf: 'center' }} />
             </View>
           </View>
           <Button 
