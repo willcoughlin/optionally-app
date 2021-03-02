@@ -37,7 +37,6 @@ export type Option = Tradable & {
   type: OptionType;
   underlyingSymbol: Scalars['String'];
   underlyingPrice: Scalars['Float'];
-  impliedVolatility: Scalars['Float'];
 };
 
 export type OptionsForExpiry = {
@@ -100,7 +99,7 @@ export type OptionInput = {
   strike: Scalars['Float'];
   expiry: Scalars['String'];
   underlyingPrice: Scalars['Float'];
-  impliedVolatility: Scalars['Float'];
+  underlyingSymbol: Scalars['String'];
   type: OptionType;
 };
 

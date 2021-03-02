@@ -109,7 +109,8 @@ const ScrollableTable = (props: ScrollableTableProps) => {
                         height={props.dataCellHeight} 
                         width={props.dataCellWidth}
                         textStyle={{ textAlign: 'center' }} 
-                        style={{ backgroundColor: mapPercentToRedGreenGradient(pctValueToMap)}} />
+                        // style={{ backgroundColor: mapPercentToRedGreenGradient(pctValueToMap)}} 
+                        />
                     ); 
                   })}
                 </TableWrapper>

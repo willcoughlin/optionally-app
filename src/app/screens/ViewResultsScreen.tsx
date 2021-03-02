@@ -4,7 +4,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import moment from 'moment';
 import React from 'react';
 import { View } from 'react-native';
-import { ActivityIndicator, Button, Headline, Subheading, Title } from 'react-native-paper';
+import { ActivityIndicator, Button, Headline, Subheading, Title, Text } from 'react-native-paper';
 import ScrollableTable from '../components/ScrollableTable';
 import { CalculateReturnsQueryData, CALCULATE_RETURNS_QUERY } from '../graphql/queries';
 import { QueryCalculateReturnsArgs } from '../graphql/types';
@@ -27,9 +27,12 @@ const ViewResultsScreen = ({ route, navigation }: ViewResultsScreenProps) => {
       }
     });
 
+  console.log(route.params.calculatorInput);
+
   return (
     <View style={Style.container}>
       {loading && <ActivityIndicator animating />}
+      {error && <Text>{JSON.stringify(error)}</Text>}
       {!loading && data &&
         <>
           <View>
@@ -59,8 +62,6 @@ const ViewResultsScreen = ({ route, navigation }: ViewResultsScreenProps) => {
             <View style={Style.standardTopMargin}>
               <Title>Profit/Loss Table</Title>
               <ScrollableTable 
-                // columnHeaders={Array.from(Array(30).keys()).map(i => moment().add(i, 'd').format('MM/DD'))}
-                // rowHeaders={Array.from(Array(30).keys()).map(i => ((i * 0.5 + 1)*1).toFixed(2))}
                 columnHeaders={data.calculateReturns.returnsTable.dates.map(d => moment(d).format('MM/DD'))}
                 rowHeaders={data.calculateReturns.returnsTable.underlyingPrices}
                 entryPrice={data.calculateReturns.entryCost}

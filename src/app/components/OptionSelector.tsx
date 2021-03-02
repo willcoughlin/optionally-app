@@ -113,19 +113,24 @@ const OptionSelector = (props: OptionSelectorProps) => {
                       <Caption>Ask: {(item?.ask ?? 0).toFixed(2)}</Caption>
                     </View>
                   )} 
-                  onPress={() => setSelectorState({
+                  onPress={() => {
+                    console.log(item);
+                    setSelectorState({
                     ...selectorState,
                     modalVisible: false,
                     selection: {
-                      currentPrice: item?.last ?? 0,
+                      currentPrice: (item?.last ?? 0) === 0 
+                        ? (item?.ask && item?.bid) ? (item.ask + item.bid / 2) : 0
+                        : item?.last ?? 0,
                       expiry: selectorState.selectedDate ?? '',
                       strike: item?.strike ?? 0,
                       underlyingPrice: item?.underlyingPrice ?? 0,
-                      impliedVolatility: item?.impliedVolatility ?? 0,
+                      underlyingSymbol: item?.underlyingSymbol ?? '',
                       type: item?.type ?? OptionType.Call,
                       quantity: 1
                     }
-                  })} />
+                    });
+                  }} />
               )} />
           }
         </Modal>

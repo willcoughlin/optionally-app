@@ -41,7 +41,6 @@ export const OPTIONS_CHAIN_QUERY = gql`
           bid
           ask
           underlyingPrice
-          impliedVolatility
           type
         }
         puts {
@@ -50,7 +49,6 @@ export const OPTIONS_CHAIN_QUERY = gql`
           bid
           ask
           underlyingPrice
-          impliedVolatility
           type
         }
       }
