@@ -27,8 +27,6 @@ const ViewResultsScreen = ({ route, navigation }: ViewResultsScreenProps) => {
       }
     });
 
-  console.log(route.params.calculatorInput);
-
   return (
     <View style={Style.container}>
       {loading && <ActivityIndicator animating />}

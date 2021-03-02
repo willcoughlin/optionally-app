@@ -114,7 +114,6 @@ const OptionSelector = (props: OptionSelectorProps) => {
                     </View>
                   )} 
                   onPress={() => {
-                    console.log(item);
                     setSelectorState({
                     ...selectorState,
                     modalVisible: false,
