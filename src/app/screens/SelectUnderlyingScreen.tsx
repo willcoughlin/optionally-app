@@ -25,6 +25,8 @@ const SelectUnderlyingScreen = ({ navigation }: SelectUnderlyingScreenProps) => 
   const [lookupSymbol, { loading: lookupLoading, error: lookupError, data: lookupData }] = useLazyQuery<LookupQueryData, QueryLookupArgs>(LOOKUP_QUERY);
   const [getPrice, { loading: priceLoading, error: priceError, data: priceData }] = useLazyQuery<UnderlyingPriceQueryData, QueryStockArgs>(UNDERLYING_PRICE_QUERY);
 
+  useEffect(() => navigation.addListener('focus', () => setSelectionState({ symbolInput: '' })), [navigation]);
+
   // On input change, call symbol lookup query
   useEffect(() => {
     if (selectionState.symbolInput.length > 0) {
