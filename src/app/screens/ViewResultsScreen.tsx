@@ -73,7 +73,7 @@ const ViewResultsScreen = ({ route, navigation }: ViewResultsScreenProps) => {
           </View>
           <Button 
             mode="outlined"
-            onPress={() => {}}
+            onPress={() => navigation.popToTop()}
           >
             Start Over
           </Button>
