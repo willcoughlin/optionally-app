@@ -100,7 +100,11 @@ const ScrollableTable = (props: ScrollableTableProps) => {
               {props.tableData.map((row, i) => (
                 <TableWrapper key={i} style={style.flexRow}>
                   {row.map((cell, i) => {
-                    const pctValueFromPrice = (cell - props.entryPrice) / props.entryPrice;
+                    const pctValueFromPrice = (
+                      props.entryPrice >= 0 
+                        ? (cell - props.entryPrice)  // numerator for long position calc
+                        : (props.entryPrice + cell)  // numerator for short 
+                    ) / props.entryPrice;
                     const pctValueToMap = Math.min(Math.max(pctValueFromPrice, -1), 1);  // bound to [-1, 1]
                     return (
                       <Cell 
