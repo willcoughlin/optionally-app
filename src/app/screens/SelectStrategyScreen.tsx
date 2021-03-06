@@ -17,6 +17,7 @@ const SelectStrategyScreen = ({ route, navigation }: SelectStrategyScreenProps) 
 
   const radioItemMapper = (strategy: StrategyType) => (
     <RadioButton.Item 
+      color="#6200ee"
       key={strategy}
       label={STRATEGY_DISPLAY_NAMES[strategy]} 
       value={strategy} />
