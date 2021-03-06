@@ -34,21 +34,21 @@ const MainStackNavigator = ({ navigation }: MainStackNavigatorProps) => (
       name="SelectUnderlyingScreen" 
       component={SelectUnderlyingScreen} 
       options={{ 
-        headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={0} />,
+        headerTitle: () => <ProgressBar progress={0} />,
         headerLeft: () => <Image source={require('../../../assets/icon-monochrome.png')} style={{ height: '60%' }} resizeMode="contain" />,
       }} />
     <MainStack.Screen 
       name="SelectStrategyScreen" 
       component={SelectStrategyScreen} 
-      options={{ headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={0.25} /> }} />
+      options={{ headerTitle: () => <ProgressBar progress={0.25} /> }} />
     <MainStack.Screen 
       name="SelectOptionLegsScreen" 
       component={SelectOptionLegsScreen} 
-      options={{ headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={0.51} /> }} />
+      options={{ headerTitle: () => <ProgressBar progress={0.51} /> }} />
     <MainStack.Screen 
       name="ViewResultsScreen" 
       component={ViewResultsScreen} 
-      options={{ headerTitle: () => <ProgressBar style={Style.navigationProgressBar} progress={1} /> }} />
+      options={{ headerTitle: () => <ProgressBar progress={1} /> }} />
   </MainStack.Navigator>
 );
 

@@ -16,17 +16,11 @@ const Style = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'baseline'
   },
-  nextScreenButton: {
-    // marginTop: 50
-  },
   navigationHeader: {
     elevation: 0,
     shadowOpacity: 0,
     borderBottomWidth: 0
   },
-  navigationProgressBar : {
-    // marginRight: 56
-  }
 });
 
 export default Style;

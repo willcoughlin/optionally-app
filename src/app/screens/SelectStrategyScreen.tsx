@@ -53,7 +53,6 @@ const SelectStrategyScreen = ({ route, navigation }: SelectStrategyScreenProps) 
       <Button 
         disabled={!selection}
         mode="contained" 
-        style={Style.nextScreenButton} 
         onPress={() => navigation.push(
           'SelectOptionLegsScreen', { 
             underlying: route.params.underlying, 
