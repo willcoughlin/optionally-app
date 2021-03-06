@@ -1,10 +1,11 @@
 import { useQuery } from '@apollo/client';
+import { FontAwesome } from '@expo/vector-icons';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import moment from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
-import { ActivityIndicator, Button, Headline, Subheading, Title, Text } from 'react-native-paper';
+import { ActivityIndicator, Button, Headline, Subheading, Text, Title, ToggleButton } from 'react-native-paper';
 import ScrollableTable from '../components/ScrollableTable';
 import { CalculateReturnsQueryData, CALCULATE_RETURNS_QUERY } from '../graphql/queries';
 import { QueryCalculateReturnsArgs } from '../graphql/types';
@@ -12,14 +13,21 @@ import Style from '../style';
 import { MainStackParamList } from '../types';
 import { formatDollarAmount } from '../util';
 
+
 /* Related types */
 type ViewResultsScreenProps = {
   route: RouteProp<MainStackParamList, 'ViewResultsScreen'>;
   navigation: StackNavigationProp<MainStackParamList, 'ViewResultsScreen'>;
 };
 
+type ViewResultsScreenState = {
+  resultsTableShowPercents: boolean;
+};
+
 /* Define screen */
 const ViewResultsScreen = ({ route, navigation }: ViewResultsScreenProps) => {
+  const [state, setState] = useState<ViewResultsScreenState>({ resultsTableShowPercents: false });
+
   const { loading, error, data } = useQuery<CalculateReturnsQueryData, QueryCalculateReturnsArgs>(
     CALCULATE_RETURNS_QUERY, {
       variables: {
@@ -58,17 +66,27 @@ const ViewResultsScreen = ({ route, navigation }: ViewResultsScreenProps) => {
               </View> 
             }
             <View style={Style.standardTopMargin}>
-              <Title>Profit/Loss Table</Title>
+              <View style={[Style.flexRowSpaceBetween, { alignItems: 'center' }]}>
+                <Title>Profit/Loss Table</Title>
+                <ToggleButton.Row 
+                  onValueChange={val => setState({ ...state, resultsTableShowPercents: val === "true" })} 
+                  value={state.resultsTableShowPercents.toString()}
+                >
+                  <ToggleButton style={{ height: 30 }} icon={() => <FontAwesome name="dollar" />} value={false.toString()} />
+                  <ToggleButton style={{ height: 30 }} icon={() => <FontAwesome name="percent" />} value={true.toString()} />
+                </ToggleButton.Row>
+              </View>
               <ScrollableTable 
                 columnHeaders={data.calculateReturns.returnsTable.dates.map(d => moment(d).format('MM/DD'))}
                 rowHeaders={data.calculateReturns.returnsTable.underlyingPrices}
                 entryPrice={data.calculateReturns.entryCost}
                 tableData={data.calculateReturns.returnsTable.dataMatrix} 
+                showPercents={state.resultsTableShowPercents}
                 dataCellHeight={40}
                 dataCellWidth={70}
                 headerRowHeight={40}
                 headerColumnWidth={70}
-                containerStyle={{ maxHeight: 400, maxWidth: '100%', alignSelf: 'center' }} />
+                containerStyle={[Style.standardTopMargin, { maxHeight: 400, maxWidth: '100%', alignSelf: 'center' }]} />
             </View>
           </View>
           <Button 

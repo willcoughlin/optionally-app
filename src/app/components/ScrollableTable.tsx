@@ -7,6 +7,7 @@ import { mapPercentToRedGreenGradient, toFixedNoNegativeZero } from '../util';
 
 type ScrollableTableProps = {
   entryPrice: number;
+  showPercents: boolean;
   tableData: number[][];
   rowHeaders: number[];
   columnHeaders: string[];
@@ -14,7 +15,7 @@ type ScrollableTableProps = {
   dataCellHeight: number;
   headerRowHeight: number;
   headerColumnWidth: number;
-  containerStyle?: ViewStyle;
+  containerStyle?: ViewStyle | ViewStyle[];
 };
 
 const ScrollableTable = (props: ScrollableTableProps) => {
@@ -109,7 +110,10 @@ const ScrollableTable = (props: ScrollableTableProps) => {
                     return (
                       <Cell 
                         key={i} 
-                        data={toFixedNoNegativeZero(cell, 2)}
+                        data={props.showPercents 
+                          ? `${toFixedNoNegativeZero(pctValueFromPrice * 100, 2)}%`
+                          : `$${toFixedNoNegativeZero(cell, 2)}`
+                        }
                         height={props.dataCellHeight} 
                         width={props.dataCellWidth}
                         textStyle={{ textAlign: 'center' }} 
