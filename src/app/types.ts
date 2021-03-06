@@ -28,6 +28,11 @@ export type MainStackParamList = {
   ViewResultsScreen: ViewResultsScreenParams;
 };
 
+export type EllipsisMenuStackParamList = {
+  EllipsisMenuScreen: undefined;
+  NotFinancialAdviceScreen: undefined;
+};
+
 export const STRATEGY_DISPLAY_NAMES: { [id in StrategyType]: string } = {
   CALL: 'Call',
   PUT: 'Put',
