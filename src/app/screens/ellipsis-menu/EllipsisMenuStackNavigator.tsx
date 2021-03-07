@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from "@react-navigation/stack";
 import React from 'react';
-import Style from '../style';
-import { EllipsisMenuStackParamList } from '../types';
+import Style from '../../style';
+import { EllipsisMenuStackParamList } from '../../types';
 import EllipsisMenuScreen from './EllipsisMenuScreen';
 import LicensesScreen from './LicensesScreen';
 import LicenseTextScreen from './LicenseTextScreen';

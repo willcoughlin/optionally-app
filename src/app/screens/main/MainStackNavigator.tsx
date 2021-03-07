@@ -3,8 +3,8 @@ import { createStackNavigator, StackNavigationProp, TransitionPresets } from '@r
 import React from 'react';
 import { Image } from 'react-native';
 import { IconButton, ProgressBar } from 'react-native-paper';
-import Style from '../style';
-import { MainStackParamList, RootStackParamList } from '../types';
+import Style from '../../style';
+import { MainStackParamList, RootStackParamList } from '../../types';
 import SelectOptionLegsScreen from './SelectOptionLegsScreen';
 import SelectStrategyScreen from './SelectStrategyScreen';
 import SelectUnderlyingScreen from './SelectUnderlyingScreen';

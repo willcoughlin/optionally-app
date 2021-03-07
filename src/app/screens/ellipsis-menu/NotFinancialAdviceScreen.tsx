@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Paragraph } from 'react-native-paper';
-import Style from '../style';
+import Style from '../../style';
 
 const NotFinancialAdviceScreen = () => (
   <View style={Style.container}>

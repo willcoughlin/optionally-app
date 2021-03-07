@@ -3,11 +3,11 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Keyboard, KeyboardAvoidingView, View } from 'react-native';
 import { ActivityIndicator, Button, Card, Headline, List, Searchbar, Subheading } from 'react-native-paper';
-import UnderlyingSelectionView from '../components/UnderlyingSelectionView';
-import { LookupQueryData, LOOKUP_QUERY, UnderlyingPriceQueryData, UNDERLYING_PRICE_QUERY } from '../graphql/queries';
-import { LookupResult, QueryLookupArgs, QueryStockArgs, Stock } from '../graphql/types';
-import Style from '../style';
-import { MainStackParamList } from '../types';
+import UnderlyingSelectionView from '../../components/UnderlyingSelectionView';
+import { LookupQueryData, LOOKUP_QUERY, UnderlyingPriceQueryData, UNDERLYING_PRICE_QUERY } from '../../graphql/queries';
+import { LookupResult, QueryLookupArgs, QueryStockArgs, Stock } from '../../graphql/types';
+import Style from '../../style';
+import { MainStackParamList } from '../../types';
 
 type SelectUnderlyingScreenProps = {
   navigation: StackNavigationProp<MainStackParamList, 'SelectUnderlyingScreen'>;

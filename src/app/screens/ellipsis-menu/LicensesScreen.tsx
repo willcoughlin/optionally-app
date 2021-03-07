@@ -3,8 +3,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { View } from 'react-native';
 import { Divider, List } from 'react-native-paper';
-import Style from '../style';
-import { EllipsisMenuStackParamList } from '../types';
+import Style from '../../style';
+import { EllipsisMenuStackParamList } from '../../types';
 
 const LicensesScreen = ({ navigation }:  { navigation: StackNavigationProp<EllipsisMenuStackParamList, 'LicensesScreen'> }) => (
   <View style={Style.container}>

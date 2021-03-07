@@ -4,8 +4,8 @@ import Constants from 'expo-constants';
 import React from 'react';
 import { Image, View } from 'react-native';
 import { Caption, Divider, List } from 'react-native-paper';
-import Style from '../style';
-import { EllipsisMenuStackParamList } from '../types';
+import Style from '../../style';
+import { EllipsisMenuStackParamList } from '../../types';
 
 type EllipsisMenuScreenProps = {
   navigation: StackNavigationProp<EllipsisMenuStackParamList, 'EllipsisMenuScreen'>;

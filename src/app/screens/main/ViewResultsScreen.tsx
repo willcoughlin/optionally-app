@@ -6,12 +6,12 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { ActivityIndicator, Button, Headline, Subheading, Text, Title, ToggleButton } from 'react-native-paper';
-import ScrollableTable from '../components/ScrollableTable';
-import { CalculateReturnsQueryData, CALCULATE_RETURNS_QUERY } from '../graphql/queries';
-import { QueryCalculateReturnsArgs } from '../graphql/types';
-import Style from '../style';
-import { MainStackParamList } from '../types';
-import { formatDollarAmount } from '../util';
+import ScrollableTable from '../../components/ScrollableTable';
+import { CalculateReturnsQueryData, CALCULATE_RETURNS_QUERY } from '../../graphql/queries';
+import { QueryCalculateReturnsArgs } from '../../graphql/types';
+import Style from '../../style';
+import { MainStackParamList } from '../../types';
+import { formatDollarAmount } from '../../util';
 
 
 /* Related types */

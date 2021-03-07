@@ -5,12 +5,12 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { ActivityIndicator, Button, Headline, HelperText, Subheading, Title } from 'react-native-paper';
-import OptionSelector from '../components/OptionSelector';
-import UnderlyingSelectionView from '../components/UnderlyingSelectionView';
-import { OptionsChainQueryData, OPTIONS_CHAIN_QUERY, PartialOptionsForExpiry } from '../graphql/queries';
-import { CalculatorInput, OptionType, QueryStockArgs, StrategyType } from '../graphql/types';
-import Style from '../style';
-import { MainStackParamList, PositionType, STRATEGY_DISPLAY_NAMES } from '../types';
+import OptionSelector from '../../components/OptionSelector';
+import UnderlyingSelectionView from '../../components/UnderlyingSelectionView';
+import { OptionsChainQueryData, OPTIONS_CHAIN_QUERY, PartialOptionsForExpiry } from '../../graphql/queries';
+import { CalculatorInput, OptionType, QueryStockArgs, StrategyType } from '../../graphql/types';
+import Style from '../../style';
+import { MainStackParamList, PositionType, STRATEGY_DISPLAY_NAMES } from '../../types';
 
 /* Related types */
 type SelectOptionLegsScreenProps = {

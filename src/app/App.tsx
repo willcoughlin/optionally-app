@@ -5,8 +5,8 @@ import { registerRootComponent } from 'expo';
 import React from 'react';
 import 'react-native-gesture-handler';
 import { Provider as PaperProvider } from 'react-native-paper';
-import EllipsisMenuStackNavigator from './screens/EllipsisMenuStackNavigator';
-import MainStackNavigator from './screens/MainStackNavigator';
+import EllipsisMenuStackNavigator from './screens/ellipsis-menu/EllipsisMenuStackNavigator';
+import MainStackNavigator from './screens/main/MainStackNavigator';
 import Variables from './variables';
 
 const RootStack = createStackNavigator();
