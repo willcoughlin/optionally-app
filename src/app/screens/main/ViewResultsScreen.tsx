@@ -10,8 +10,8 @@ import ScrollableTable from '../../components/ScrollableTable';
 import { CalculateReturnsQueryData, CALCULATE_RETURNS_QUERY } from '../../graphql/queries';
 import { QueryCalculateReturnsArgs } from '../../graphql/types';
 import Style from '../../style';
-import { MainStackParamList } from '../../types';
 import { formatDollarAmount } from '../../util';
+import { MainStackParamList } from './types';
 
 
 /* Related types */

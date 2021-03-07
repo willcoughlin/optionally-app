@@ -4,10 +4,11 @@ import React from 'react';
 import { Image } from 'react-native';
 import { IconButton, ProgressBar } from 'react-native-paper';
 import Style from '../../style';
-import { MainStackParamList, RootStackParamList } from '../../types';
+import { RootStackParamList } from '../../types';
 import SelectOptionLegsScreen from './SelectOptionLegsScreen';
 import SelectStrategyScreen from './SelectStrategyScreen';
 import SelectUnderlyingScreen from './SelectUnderlyingScreen';
+import { MainStackParamList } from './types';
 import ViewResultsScreen from './ViewResultsScreen';
 
 const MainStack = createStackNavigator<MainStackParamList>();

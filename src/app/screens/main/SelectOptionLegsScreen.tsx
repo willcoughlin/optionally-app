@@ -10,7 +10,8 @@ import UnderlyingSelectionView from '../../components/UnderlyingSelectionView';
 import { OptionsChainQueryData, OPTIONS_CHAIN_QUERY, PartialOptionsForExpiry } from '../../graphql/queries';
 import { CalculatorInput, OptionType, QueryStockArgs, StrategyType } from '../../graphql/types';
 import Style from '../../style';
-import { MainStackParamList, PositionType, STRATEGY_DISPLAY_NAMES } from '../../types';
+import { PositionType, STRATEGY_DISPLAY_NAMES } from '../../types';
+import { MainStackParamList } from './types';
 
 /* Related types */
 type SelectOptionLegsScreenProps = {

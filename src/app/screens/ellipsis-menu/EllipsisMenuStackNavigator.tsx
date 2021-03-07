@@ -2,7 +2,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from "@react-navigation/stack";
 import React from 'react';
 import Style from '../../style';
-import { EllipsisMenuStackParamList } from '../../types';
 import EllipsisMenuScreen from './EllipsisMenuScreen';
 import LicensesScreen from './LicensesScreen';
 import LicenseTextScreen from './LicenseTextScreen';
@@ -10,6 +9,7 @@ import NotFinancialAdviceScreen from './NotFinancialAdviceScreen';
 import OptionAllyLicenseScreen from './OptionAllyLicenseScreen';
 import ThirdPartyLicenseDetailScreen from './ThirdPartyLicenseDetailScreen';
 import ThirdPartyLicensesScreen from './ThirdPartyLicensesScreen';
+import { EllipsisMenuStackParamList } from './types';
 
 const EllipsisMenuStack = createStackNavigator<EllipsisMenuStackParamList>();
 

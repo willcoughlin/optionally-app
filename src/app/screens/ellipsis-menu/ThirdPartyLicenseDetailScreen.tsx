@@ -5,7 +5,7 @@ import React from 'react';
 import { Linking, View } from 'react-native';
 import { Divider, List } from 'react-native-paper';
 import Style from '../../style';
-import { EllipsisMenuStackParamList } from '../../types';
+import { EllipsisMenuStackParamList } from './types';
 
 type ThirdPartyLicenseDetailScreenProps = {
   navigation: StackNavigationProp<EllipsisMenuStackParamList, 'ThirdPartyLicenseDetailScreen'>;

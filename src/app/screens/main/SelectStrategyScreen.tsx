@@ -5,7 +5,8 @@ import { View } from 'react-native';
 import { Button, Headline, RadioButton, Subheading } from 'react-native-paper';
 import { StrategyType } from '../../graphql/types';
 import Style from '../../style';
-import { MainStackParamList, STRATEGY_DISPLAY_NAMES } from '../../types';
+import { STRATEGY_DISPLAY_NAMES } from '../../types';
+import { MainStackParamList } from './types';
 
 type SelectStrategyScreenProps = {
   route: RouteProp<MainStackParamList, 'SelectStrategyScreen'>;

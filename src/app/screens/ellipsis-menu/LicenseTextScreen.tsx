@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Text } from 'react-native-paper';
 import Style from '../../style';
-import { EllipsisMenuStackParamList } from '../../types';
+import { EllipsisMenuStackParamList } from './types';
 
 type LicenseTextScreenProps = {
   route: RouteProp<EllipsisMenuStackParamList, 'LicenseTextScreen'>
