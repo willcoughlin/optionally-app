@@ -1,5 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator, TransitionPresets } from "@react-navigation/stack";
 import React from 'react';
 import Style from '../../style';
 import EllipsisMenuScreen from './EllipsisMenuScreen';
@@ -16,12 +16,15 @@ const EllipsisMenuStack = createStackNavigator<EllipsisMenuStackParamList>();
 const EllipsisMenuStackNavigator = () => (
   <EllipsisMenuStack.Navigator 
     headerMode="float" 
-    screenOptions={{ headerStyle: Style.navigationHeader }}
+    screenOptions={{ 
+      headerStyle: Style.navigationHeader,
+      ...TransitionPresets.SlideFromRightIOS
+    }}
   >
     <EllipsisMenuStack.Screen
       name="EllipsisMenuScreen"
       component={EllipsisMenuScreen} 
-      options={{ headerTitle: () => undefined, headerBackImage: () => <Ionicons style={{paddingTop: 5}} name="close" size={30} /> }} />
+      options={{ headerTitle: () => undefined, headerBackImage: () => <Ionicons name="close" size={25} /> }} />
     <EllipsisMenuStack.Screen
       name="NotFinancialAdviceScreen"
       component={NotFinancialAdviceScreen}
