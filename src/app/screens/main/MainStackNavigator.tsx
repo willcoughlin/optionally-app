@@ -36,7 +36,7 @@ const MainStackNavigator = ({ navigation }: MainStackNavigatorProps) => (
       component={SelectUnderlyingScreen} 
       options={{ 
         headerTitle: () => <ProgressBar progress={0} />,
-        headerLeft: () => <Image source={require('../../../assets/icon-monochrome.png')} style={{ height: '60%' }} resizeMode="contain" />,
+        headerLeft: () => <Image source={require('../../../../assets/icon-monochrome.png')} style={{ height: '60%' }} resizeMode="contain" />,
       }} />
     <MainStack.Screen 
       name="SelectStrategyScreen" 

@@ -14,7 +14,7 @@ type EllipsisMenuScreenProps = {
 const EllipsisMenuScreen = ({ navigation }:  EllipsisMenuScreenProps) => (
   <View style={Style.container}>
     <View>
-      <Image source={require('../../../assets/cover.png')} style={{ height: 144, width: 350 }} resizeMode="contain" />
+      <Image source={require('../../../../assets/cover.png')} style={{ height: 144, width: 350 }} resizeMode="contain" />
       <List.Item
         title="Not Financial Advice"
         right={() => <List.Icon icon={() => <Ionicons style={{ paddingTop: 5 }} size={15} name="chevron-forward" />} /> }
