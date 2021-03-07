@@ -35,6 +35,12 @@ This is the App entry point. In here we configure the Apollo GraphQL client, tak
 ### [src/app/util.ts](src/app/util.ts)
 Some global helper functions live here. Mostly number to string formatting.
 
+### [src/app/graphql](src/app/graphql)
+This directory contains GraphQL queries, GraphQL types, as well as the schema definition file.
+
+#### [src/app/graphql/queries.ts](src/app/graphql/queries.ts)
+Here we find the GraphQL queries we make to the server.
+
 ### [src/app/components](src/app/components)
 React Native Components. These are UI elements that are reused or were complicated enough to pull out into their own component.
 
