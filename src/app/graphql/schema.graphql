@@ -1,0 +1,96 @@
+# Return types
+interface Tradable {
+  bid: Float!
+  ask: Float!
+  last: Float!
+}
+
+type Stock implements Tradable {
+  bid: Float!
+  ask: Float!
+  last: Float!
+  symbol: String!
+  optionsChain: [OptionsForExpiry!]!
+}
+
+type Option implements Tradable {
+  bid: Float!
+  ask: Float!
+  last: Float!
+  strike: Float!
+  expiry: String!
+  type: OptionType!
+  underlyingSymbol: String!
+  underlyingPrice: Float!
+}
+
+type OptionsForExpiry {
+  expiry: String!
+  calls: [Option!]!
+  puts: [Option!]!
+}
+
+type CalculatorResult {
+  entryCost: Float!
+  maxRisk: Float 
+  maxReturn: Float  # null values for maxRisk/maxReturn indicate infinity
+  breakEvenAtExpiry: [Float!]!  # 1 breakeven for directional plays, 2 breakevens for delta-neutral
+  returnsTable: ReturnsTable!
+}
+
+type ReturnsTable {
+  dates: [String!]!
+  underlyingPrices: [Float!]!
+  dataMatrix: [[Float!]!]!
+}
+
+type LookupResult {
+  symbol: String!
+  name: String!
+  exchange: String!
+}
+
+# Enums
+enum OptionType {
+  CALL,
+  PUT
+}
+
+enum StrategyType {
+  # Basic: Long or Short
+  CALL,
+  PUT,
+  STRADDLE_STRANGLE,
+  # Vertical spreads
+  BULL_CALL_SPREAD,
+  BEAR_CALL_SPREAD,
+  BULL_PUT_SPREAD,
+  BEAR_PUT_SPREAD,
+  # Other
+  IRON_CONDOR
+}
+
+# Query inputs
+input CalculatorInput {
+  strategy: StrategyType!,
+  longCall: OptionInput,
+  longPut: OptionInput,
+  shortCall: OptionInput,
+  shortPut: OptionInput
+}
+
+input OptionInput {
+  quantity: Int!,
+  currentPrice: Float!,
+  strike: Float!,
+  expiry: String!
+  underlyingPrice: Float!,
+  type: OptionType!
+}
+
+# Queries
+type Query {
+  lookup(query: String!): [LookupResult]!
+  stock(symbol: String!): Stock!
+  calculateReturns(input: CalculatorInput!) : CalculatorResult!
+}
