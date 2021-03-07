@@ -1,12 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Paragraph, Title } from 'react-native-paper';
+import { Paragraph } from 'react-native-paper';
 import Style from '../style';
 
 const NotFinancialAdviceScreen = () => (
   <View style={Style.container}>
     <View>
-      <Title>Not Financial Advice</Title>
       <Paragraph style={[Style.standardTopMargin, { fontWeight: 'bold' }]}>
         The content of OptionAlly (this app) is not intended as, and shall not be understood or construed as, financial advice.
       </Paragraph>

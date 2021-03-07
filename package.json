@@ -7,7 +7,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "graphql-codegen": "graphql-codegen --config graphql-codegen.yml"
+    "graphql-codegen": "graphql-codegen --config graphql-codegen.yml",
+    "license-checker": "license-checker --production --direct --json > ./src/app/licenses.json --customPath licenseFormat.json"
   },
   "dependencies": {
     "@apollo/client": "^3.3.11",
