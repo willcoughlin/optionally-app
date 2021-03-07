@@ -47,19 +47,19 @@ This component is a two-axis scrollable table with sticky row and column headers
 ### [src/app/screens/ellipsis-menu](src/app/screens/ellipsis-menu)
 App Screens for the ellispis menu navigation stack. When the user presses the three dots icon in the header bar.
 
-#### [src/app/screens/main](src/app/screens/main)
+### [src/app/screens/main](src/app/screens/main)
 App Screens for the main navigation stack. When the user is using the app to set up his or her options strategy and see results.
 
-##### [src/app/screens/main/SelectUnderlyingScreen.tsx](src/app/screens/main/SelectUnderlyingScreen.tsx)
+#### [src/app/screens/main/SelectUnderlyingScreen.tsx](src/app/screens/main/SelectUnderlyingScreen.tsx)
 The default screen shown with when the app opens. We present a search bar to allow for selection of an underling stock or ETF.
 
-##### [src/app/screens/main/SelectStrategyScreen.tsx](src/app/screens/main/SelectStrategyScreen.tsx)
+#### [src/app/screens/main/SelectStrategyScreen.tsx](src/app/screens/main/SelectStrategyScreen.tsx)
 This is the second screen in the main navigation stack. Now that the user has selected an underlying asset, we present a list of Radio Buttons so he or she may select which option strategy to proceed with.
 
-##### [src/app/screens/main/SelectOptionLegs.tsx](src/app/screens/main/SelectOptionLegs.tsx)
+#### [src/app/screens/main/SelectOptionLegsScreen.tsx](src/app/screens/main/SelectOptionLegsScreen.tsx)
 At this point, the remaining properties of the `CalculatorInput` must be filled. Based on the user's selected strategy, we provide `OptionSelector`s for the user to choose all of their necessary option legs.
 
-##### [src/app/screens/main/ViewResults.tsx](src/app/screens/main/ViewResults.tsx)
+#### [src/app/screens/main/ViewResultsScreen.tsx](src/app/screens/main/ViewResultsScreen.tsx)
 On load, we query the server for resuts given the input provided in the previous screens. After the server returns, we present the risk/reward details, and show a matrix of returns by underlying asset price and date using our `ScrollableTable` component.
 
 ## Attributions
