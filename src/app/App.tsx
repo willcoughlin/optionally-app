@@ -7,9 +7,10 @@ import 'react-native-gesture-handler';
 import { Provider as PaperProvider } from 'react-native-paper';
 import EllipsisMenuStackNavigator from './screens/ellipsis-menu/EllipsisMenuStackNavigator';
 import MainStackNavigator from './screens/main/MainStackNavigator';
+import { RootStackParamList } from './types';
 import Variables from './variables';
 
-const RootStack = createStackNavigator();
+const RootStack = createStackNavigator<RootStackParamList>();
 
 // Initialize Apollo Client
 const client = new ApolloClient({
