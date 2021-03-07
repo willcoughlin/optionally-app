@@ -34,10 +34,6 @@ const EllipsisMenuStackNavigator = () => (
       component={LicensesScreen}
       options={{ headerTitle: "Licenses" }} />
     <EllipsisMenuStack.Screen
-      name="OptionAllyLicenseScreen"
-      component={OptionAllyLicenseScreen} 
-      options={{ headerTitle: "OptionAlly License" }} />
-    <EllipsisMenuStack.Screen
       name="ThirdPartyLicensesScreen"
       component={ThirdPartyLicensesScreen}
       options={{ headerTitle: "Third Party Licenses" }} />
